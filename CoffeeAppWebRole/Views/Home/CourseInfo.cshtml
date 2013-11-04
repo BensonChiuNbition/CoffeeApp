@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "CourseInfo";
+}
+@section featured {
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <div>
+                @ViewBag.CourseDescription
+
+                Media Page:
+                @Html.ActionLink("Course Media Resource", "CourseMediaResource", "Home")
+
+                Classmates Page:
+                @Html.ActionLink("Course Classmate List", "CourseClassmateList", "Home")
+            </div>
+        </div>
+    </section>
+}

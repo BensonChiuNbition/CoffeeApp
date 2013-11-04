@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Friend List";
+}
+
+@section featured {
+
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+            <div>
+                Your Profile Page:
+                @Html.ActionLink("Your Profile", "Profile", "Home")
+
+                Course Info Page:
+                @Html.ActionLink("Course Info", "CourseInfo", "Home")
+            </div>
+
+
+
+            <div class="cf friend">
+                <div class="row">
+                    <div class="large-6 columns">
+                        <div class="panel">
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <img src="../Images/profile-photo.jpg" />
+                                </div>
+                                <div class="large-8 columns">
+                                    <h3>Suzanne</h3>
+                                    <p>Gender: Female</p>
+                                    <p>Tel: +852 12321231</p>
+                                    <p>EMail: suzanne@onefourone.com</p>
+                                    <p>(Friend request button goes here)</p>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="large-6 columns">
+                        <div class="panel">
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <img src="../Images/profile-photo.jpg" />
+                                </div>
+                                <div class="large-8 columns">
+                                    <h3>Judy</h3>
+                                    <p>Gender: Female</p>
+                                    <p>Tel: +852 12321232</p>
+                                    <p>EMail: judy@onefourone.com</p>
+                                    <p>(Friend request button goes here)</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-6 columns">
+                        <div class="panel">
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <img src="../Images/profile-photo.jpg" />
+                                </div>
+                                <div class="large-8 columns">
+                                    <h3>Jessica</h3>
+                                    <p>Gender: Female</p>
+                                    <p>Tel: +852 12321233</p>
+                                    <p>EMail: jessica@onefourone.com</p>
+                                    <p>(Friend request button goes here)</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+}

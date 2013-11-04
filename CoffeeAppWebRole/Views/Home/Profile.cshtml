@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "Profile";
+}
+
+@section profile {
+    <section class="profile">
+        <div class="content-wrapper">
+            <div class="cf">
+                <div class="row">
+                    <div class="large-3  columns">
+
+                        <img src="../Images/profile-photo.jpg" />
+
+                    </div>
+                    <div class="large-9 columns">
+
+                        <p>Member ID: 123454321</p>
+                        <p>Name: User 1</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+@section featured {
+
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+
+
+
+            <div class="cf crs">
+                <div class="row">
+                    <div class="large-12 columns">
+
+                        <div class="row">
+                            <div class="small-6 columns">
+                                E-Mail
+                            </div>
+                            <div class="small-6 columns">
+                                <div class="toggler">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="small-6 columns">
+                                Address
+                            </div>
+                            <div class="small-6 columns">
+                                <div class="toggler">&nbsp;</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-2 columns">
+                        <p>@Html.ActionLink("Cancel", "CourseList", "Home", new { }, new { @class = "button" })</p>
+                    </div>
+                    <div class="large-10 columns">
+                        <p>@Html.ActionLink("Save", "CourseList", "Home", new { }, new { @class = "button" })</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+}
+
+
+@section featured2 {
+
+    <script>
+        $(function () {
+            $("div.toggler").click(function () {
+                $(this).toggleClass("on");
+            });
+        });
+    </script>
+
+}
