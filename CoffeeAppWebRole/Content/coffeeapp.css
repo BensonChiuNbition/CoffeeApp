@@ -59,6 +59,16 @@
         margin-right: auto;
     }
 
+    .cf .statusgrid {
+        float: left;
+        width:30px;
+        height: 30px;
+        border: 1px solid grey;
+    }
+    .cf .Past .statusgrid {
+        background-color: grey;
+    }
+
 
 .header {
     position: fixed;

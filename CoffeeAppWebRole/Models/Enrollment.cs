@@ -2,16 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.WindowsAzure.StorageClient;
 
-namespace CoffeeApp.Models
+namespace CoffeeAppWebRole.Models
 {
-    public class Enrollment
+    public class Enrollment : TableServiceEntity
     {
-        public int EnrollmentID { get; set; }
-        public int CourseID { get; set; }
-        public int MemberID { get; set; }
+        public enum Status { None, Past, Current, Future };
 
-        public virtual Member Member { get; set; }
-        public virtual Course Course { get; set; }
+        public Enrollment()
+        {
+            base.PartitionKey = "Cafe";
+            base.RowKey = Guid.NewGuid().ToString();
+            //this.EnrollmentID = Guid.NewGuid().ToString();
+        }
+
+        public Enrollment(string partitionKey, string rowKey)
+        {
+            base.PartitionKey = partitionKey;
+            base.RowKey = rowKey;
+            //this.EnrollmentID = rowKey;
+        }
+
+        //public string EnrollmentID { get; set; }
+        public string MemberID { get; set; }
+        public string CourseID { get; set; }
+        public string EnrollStatus { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿@{
     ViewBag.Title = "Course List";
+    string myMemberId = Request.Params["userid"];
+    string requestedPendingCount = ViewBag.RequestedPendingCount;
 }
 
 @section profile {
@@ -9,11 +11,11 @@
                 <div class="row">
                     <div class="large-5 columns">
 
-                        <p>Member ID: 123454321</p>
+                        <p>Member ID: t0009</p>
                         <p>Name: User 1</p>
                         <p>Birthday: 01/01</p>
                         <p>E-Mail: hotmail@hotmailc.com</p>
-                        <p>@Html.ActionLink("Edit Profile", "Profile", "Home", new { }, new { @class = "button" })</p>
+                        <p>@Html.ActionLink("Edit Profile", "Profile", "Home", new { userid = myMemberId }, new { @class = "button" })</p>
 
 
                     </div>
@@ -24,7 +26,7 @@
                     </div>
                     <div class="large-1 columns">
 
-                        <p>@Html.ActionLink("+5", "FriendMadeList", "Home", new { }, new { @class = "small button" })</p>
+                        <p>@Html.ActionLink(requestedPendingCount, "FriendMadeList", "Home", new { userid = myMemberId }, new { @class = "small button" })</p>
 
                     </div>
                 </div>
@@ -41,17 +43,42 @@
                 <h1>@ViewBag.Title.</h1>
                 <h2>@ViewBag.Message</h2>
             </hgroup>
-            <div>
-                Your Profile Page:
-                @Html.ActionLink("Your Profile", "Profile", "Home")
-
-                Course Info Page:
-                @Html.ActionLink("Course Info", "CourseInfo", "Home")
-            </div>
-
 
 
             <div class="cf crs">
+                <div class="row">
+            @{
+                int i = 0;
+                foreach (var course in ViewBag.Courses)
+                {        
+                    <div class="large-6 columns @(ViewBag.EnrollmentInfos.ContainsKey(course.RowKey) ? ViewBag.EnrollmentInfos[course.RowKey] : "")">
+                        <div class="panel">
+                            <div class="row">
+                                <div class="large-8 columns">
+                                    <div class="statusgrid">&nbsp;</div>
+                                    <h3>@course.Name</h3>
+                                    <p>@course.Description</p>
+                                    <p>@Html.ActionLink("Course Info", "CourseInfo", "Home", new { userid = myMemberId , coursecode = @course.RowKey }, new { @class = "button" })</p>
+                                </div>
+                                <div class="large-4 columns">
+                                    <img src="../Images/coffee_wall.jpg" />
+
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    if (i%2 == 1){ 
+               @:</div>
+               @:<div class="row">
+                    }
+                    i++;
+                }
+            }
+                </div>
+            
+
+                @*
                 <div class="row">
                     <div class="large-6 columns">
                         <div class="panel">
@@ -65,9 +92,6 @@
                                     <img src="../Images/coffee_wall.jpg" />
                                 </div>
                             </div>
-
-
-
                         </div>
                     </div>
                     <div class="large-6 columns">
@@ -92,6 +116,7 @@
                         </div>
                     </div>
                 </div>
+                *@
             </div>
 
         </div>

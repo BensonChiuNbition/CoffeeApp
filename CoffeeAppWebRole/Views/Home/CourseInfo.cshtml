@@ -1,22 +1,45 @@
 ﻿@{
-    ViewBag.Title = "CourseInfo";
+    ViewBag.Title = "Course Info";
+    string myMemberId = Request.Params["userid"];
 }
+
 @section featured {
+
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
                 <h1>@ViewBag.Title.</h1>
                 <h2>@ViewBag.Message</h2>
             </hgroup>
-            <div>
-                @ViewBag.CourseDescription
 
-                Media Page:
-                @Html.ActionLink("Course Media Resource", "CourseMediaResource", "Home")
 
-                Classmates Page:
-                @Html.ActionLink("Course Classmate List", "CourseClassmateList", "Home")
+            <div class="cf crs" id ="courseInfo">
+                <div class="row">
+                    <div class="large-12 columns @ViewBag.EnrollmentInfo">
+                        <div class="panel">
+                            <div class="row">
+                                <div class="large-8 columns">
+                                    <div class="statusgrid">&nbsp;</div>
+                                    <h3>@ViewBag.CourseID - @ViewBag.Name</h3>
+                                    <p><b>Date:</b> @ViewBag.DateStart - @ViewBag.DateEnd</p>
+                                    <p><b>Time:</b> @ViewBag.CourseDateTime</p>
+                                    <p><b>Instructor:</b> @ViewBag.Instructor</p>
+                                    <p><b>Description:</b></p>
+                                    <p>@ViewBag.Description</p>
+                                    @if ("Past".Equals(ViewBag.EnrollmentInfo)){
+                                    <p>@Html.ActionLink("Course Media", "CourseMediaResource", "Home", new { courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
+                                    <p>@Html.ActionLink("Your Classmates", "CourseClassmateList", "Home", new { userid=myMemberId, courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
+                                    }
+                                </div>
+                                <div class="large-4 columns">
+                                    <img src="../Images/coffee_wall.jpg" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
+
         </div>
     </section>
 }

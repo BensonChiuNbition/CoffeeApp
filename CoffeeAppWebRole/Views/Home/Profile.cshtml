@@ -13,9 +13,9 @@
 
                     </div>
                     <div class="large-9 columns">
-
-                        <p>Member ID: 123454321</p>
-                        <p>Name: User 1</p>
+                        <p>MemberID: @ViewBag.TargetMember.RowKey</p>
+                        <p>NameEN: @ViewBag.TargetMember.NameEN</p>
+                        <p>NameCH: @ViewBag.TargetMember.NameCH</p>
                     </div>
                 </div>
             </div>
@@ -34,35 +34,38 @@
 
 
 
-            <div class="cf crs">
+            <div class="cf crs" id ="profileInfo">
                 <div class="row">
                     <div class="large-12 columns">
+                        @foreach (var x in ViewBag.DataAccessControlMap)
+                        {
+                            <div class="row" style="margin-bottom: 2%">
+                                <div class="small-7 columns">
+                                    <div class="row">
+                                        <div class="large-6 columns">
+                                            <b>@x.Key</b>
+                                        </div>
+                                        <div class="large-6 columns">
+                                            @ViewBag.MapMember[x.Key]
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="small-5 columns">
+                                    <div class="toggler @(x.Value==1 ? "on" : "")" data-type="@x.Key">&nbsp;</div>
+                                </div>
+                            </div>
+                        }
 
-                        <div class="row">
-                            <div class="small-6 columns">
-                                E-Mail
-                            </div>
-                            <div class="small-6 columns">
-                                <div class="toggler">&nbsp;</div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="small-6 columns">
-                                Address
-                            </div>
-                            <div class="small-6 columns">
-                                <div class="toggler">&nbsp;</div>
-                            </div>
-                        </div>
 
                     </div>
                 </div>
                 <div class="row">
                     <div class="large-2 columns">
-                        <p>@Html.ActionLink("Cancel", "CourseList", "Home", new { }, new { @class = "button" })</p>
+                        <p>@Html.ActionLink("Cancel", "CourseList", "Home", new { userid=ViewBag.TargetMember.RowKey }, new { @class = "button" })</p>
                     </div>
                     <div class="large-10 columns">
-                        <p>@Html.ActionLink("Save", "CourseList", "Home", new { }, new { @class = "button" })</p>
+                        <p><input type="button" id="saveProfile" value="saveProfile" /></p>
+                        @*<p>@Html.ActionLink("Save", "CourseList", "Home", new { userid=ViewBag.TargetMember.RowKey, dac="whatever" }, new { @class = "button", @id = "saveProfile" })</p>*@
                     </div>
                 </div>
             </div>
@@ -74,12 +77,26 @@
 
 @section featured2 {
 
-    <script>
-        $(function () {
+    <script type="text/javascript">
+        //$(function () {
             $("div.toggler").click(function () {
                 $(this).toggleClass("on");
             });
-        });
+
+            $("input#saveProfile").click(function () {
+
+                var j = '{"NameEN":0,"NameCH":0,"Gender":0,"DOB":0,"EMail":0,"MailAddress":0,"Phone":0,"Occupation":0,"WorkAddress":0,"ProfilePic":0}';
+                var obj = JSON.parse(j);
+                
+                var $onItems = $("#profileInfo").find(".toggler.on");
+                $.each($onItems, function (k, v) {
+                    obj[$(v).attr("data-type")] = 1;
+                });
+                
+                window.location.href = "/Home/CourseList?userid=@ViewBag.TargetMember.RowKey&dac=" + JSON.stringify(obj);
+
+            });
+        //});
     </script>
 
 }

@@ -1,5 +1,94 @@
 ﻿@{
-    ViewBag.Title = "CourseClassmateList";
+    ViewBag.Title = "Course Classmate List";
+    string myMemberId = Request.Params["userid"];
 }
 
-<h2>CourseClassmateList</h2>
+
+@section featured {
+
+    <section class="featured">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>@ViewBag.Title.</h1>
+                <h2>@ViewBag.Message</h2>
+            </hgroup>
+
+
+            <div class="cf crs">
+                <div class="row">
+            @{
+                int i = 0;
+                foreach (var member in ViewBag.Members)
+                {        
+                    <div class="large-6 columns classmate" data-context="@member.RowKey">
+                        <div class="panel">
+                            <div class="row">
+                                <div class="large-4 columns">
+                                    <img src="../Images/profile-photo.jpg" />
+
+                                    
+                                </div>
+                                <div class="large-8 columns">
+                                    <h3>@member.NameEN</h3>
+                                    <p>Gender: @member.Gender</p>
+                                    <p>EMail: @member.EMail</p>
+
+                                    <!--div class="rButton"><input type="button" id="friendRequest" value="Friend Request"/></!--div//-->
+                                    
+                                    @if (ViewBag.FriendsRequestedPendingHashTable.ContainsKey(member.RowKey))
+                                    {
+                                    <div class="rRequestSent">Friend Request has been submitted.</div>
+
+                                    }
+                                    else if (ViewBag.FriendsAcceptedHashTable.ContainsKey(member.RowKey))
+                                    {
+                                    <div class="rRequestSent">Friend accepted.</div>
+                                    }
+                                    else
+                                    {
+                                    <div class="rButton">@Html.ActionLink("Friend Request", "CourseClassmateList", "Home", new { userid = myMemberId, courseid = @ViewBag.CourseID, requestmemberid = @member.RowKey }, new { @class = "button" })</div>
+                                    
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                                    if (i % 2 == 1)
+                                    { 
+               @:</div>
+               @:<div class="row">
+                    }
+                    i++;
+                }
+            }
+                </div>
+            
+
+            </div>
+
+        </div>
+    </section>
+}
+
+
+@section featured2 {
+    <script type="text/javascript">
+        //$(function () {
+
+
+            $("input#friendRequest").click(function () {
+                var $c = $(this).closest(".classmate");
+                console.log($c);
+
+                var requestMemberId = $c.attr("data-context");
+                $c.find(".rButton").hide();
+                $c.find(".rRequestSent").show();
+
+
+
+
+            });
+        //});
+    </script>
+}
