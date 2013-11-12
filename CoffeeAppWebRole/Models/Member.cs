@@ -12,20 +12,19 @@ namespace CoffeeAppWebRole.Models
             base.PartitionKey = "Cafe";
             base.RowKey = Guid.NewGuid().ToString();
             //this.MemberID = Guid.NewGuid().ToString();
-            this.NameEN = "#";
         }
 
-        public Member(string partitionKey, string rowKey, string nameEN) {
+        public Member(string partitionKey, string rowKey) {
             base.PartitionKey = partitionKey;
             base.RowKey = rowKey;
             //this.MemberID = rowKey;
-            this.NameEN = nameEN;
         }
 
         //public string MemberID { get; set; }
         public string NameEN { get; set; }
         public string NameCH { get; set; }
         public string Gender { get; set; }
+        public string LoginName { get; set; }
         public string Password { get; set; }
         public string DOB { get; set; }
         public string Phone { get; set; }

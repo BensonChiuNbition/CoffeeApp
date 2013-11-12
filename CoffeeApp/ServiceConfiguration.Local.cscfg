@@ -3,8 +3,9 @@
   <Role name="CoffeeAppWebRole">
     <Instances count="1" />
     <ConfigurationSettings>
-      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
-      <Setting name="TableStorgeConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="DefaultEndpointsProtocol=https;AccountName=nbitiondev;AccountKey=8M8mFo1DW7xdbmjyuq3YICCkWLVW1XH0p3w6TDc3pI/yKW9lSefHX7AwXPxpvciNHJD2tNIKGSt1vL7IyH5/Gw==" />
+      <Setting name="TableStorgeConnectionString" value="DefaultEndpointsProtocol=https;AccountName=nbitiondev;AccountKey=8M8mFo1DW7xdbmjyuq3YICCkWLVW1XH0p3w6TDc3pI/yKW9lSefHX7AwXPxpvciNHJD2tNIKGSt1vL7IyH5/Gw==" />
+      <Setting name="BlobStorgeConnectionString" value="DefaultEndpointsProtocol=https;AccountName=nbitiondev;AccountKey=8M8mFo1DW7xdbmjyuq3YICCkWLVW1XH0p3w6TDc3pI/yKW9lSefHX7AwXPxpvciNHJD2tNIKGSt1vL7IyH5/Gw==" />
     </ConfigurationSettings>
   </Role>
 </ServiceConfiguration>

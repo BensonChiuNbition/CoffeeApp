@@ -52,8 +52,10 @@ namespace CoffeeAppWebRole.ActionData
 
         public void CreateTable()
         {
-            TableStorageContextAccepteds.CreateTableIfNotExist();
-
+            if (!TableStorageContextAccepteds.IsTableExisted())
+            {
+                TableStorageContextAccepteds.CreateTableIfNotExist();
+            }
 
         }
     }

@@ -71,15 +71,14 @@
 
 
 .header {
-    position: fixed;
+    position: relative;
     width: 100%;
     background-color: #777;
-    z-index: 1;
-    top: 0;
+
 }
 
 #body {
-    margin-top: 200px;
+
 }
 
 .profile {

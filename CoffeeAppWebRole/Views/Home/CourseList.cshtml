@@ -5,24 +5,28 @@
 }
 
 @section profile {
+
     <section class="profile">
         <div class="content-wrapper">
             <div class="cf">
                 <div class="row">
                     <div class="large-5 columns">
 
-                        <p>Member ID: t0009</p>
-                        <p>Name: User 1</p>
-                        <p>Birthday: 01/01</p>
-                        <p>E-Mail: hotmail@hotmailc.com</p>
+
+                        @foreach (var x in @ViewBag.Myself["DataAccessControlMap"])
+                                    {
+                                        if (x.Value == 1) {
+                                            <p><b>@ViewBag.MemberInfoLabel[x.Key]</b> @ViewBag.Myself[x.Key]</p>
+                                        }
+                                    }
                         <p>@Html.ActionLink("Edit Profile", "Profile", "Home", new { userid = myMemberId }, new { @class = "button" })</p>
 
 
                     </div>
                     <div class="large-3 large-offset-3 columns">
-
-                        <img src="../Images/profile-photo.jpg" />
-
+                        @if (ViewBag.Myself["DataAccessControlMap"]["ProfilePic"] == 1) {
+                        <img src="Image" />
+                        }
                     </div>
                     <div class="large-1 columns">
 

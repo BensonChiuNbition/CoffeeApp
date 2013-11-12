@@ -16,6 +16,7 @@
     </Imports>
     <ConfigurationSettings>
       <Setting name="TableStorgeConnectionString" />
+      <Setting name="BlobStorgeConnectionString" />
     </ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>

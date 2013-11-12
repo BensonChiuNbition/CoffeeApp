@@ -9,14 +9,28 @@
                 <div class="row">
                     <div class="large-3  columns">
 
-                        <img src="../Images/profile-photo.jpg" />
+                        <img src="Image" id="profilePic" />
+
 
                     </div>
                     <div class="large-9 columns">
-                        <p>MemberID: @ViewBag.TargetMember.RowKey</p>
-                        <p>NameEN: @ViewBag.TargetMember.NameEN</p>
-                        <p>NameCH: @ViewBag.TargetMember.NameCH</p>
+                        <p>@ViewBag.MemberInfoLabel["RowKey"] @ViewBag.TargetMember["RowKey"]</p>
                     </div>
+                </div>
+                <div class="row" id="editProfile" style="display:none;">
+                <form action="UploadProfileImage" method="post" enctype="multipart/form-data">
+                
+                    <div class="large-3  columns">
+
+                            <input type="file" name="file" />
+                        
+                    </div>
+                    <div class="large-9 columns">
+
+                        <input type="submit" value="Upload">
+                    </div>
+                
+                </form>
                 </div>
             </div>
         </div>
@@ -37,16 +51,17 @@
             <div class="cf crs" id ="profileInfo">
                 <div class="row">
                     <div class="large-12 columns">
-                        @foreach (var x in ViewBag.DataAccessControlMap)
+                        @foreach (var x in ViewBag.TargetMember["DataAccessControlMap"])
                         {
                             <div class="row" style="margin-bottom: 2%">
                                 <div class="small-7 columns">
                                     <div class="row">
                                         <div class="large-6 columns">
-                                            <b>@x.Key</b>
+                                            <b>@ViewBag.MemberInfoLabel[x.Key]</b>
                                         </div>
                                         <div class="large-6 columns">
-                                            @ViewBag.MapMember[x.Key]
+                                            
+                                            <input type="text" name="@x.Key" value="@ViewBag.TargetMember[x.Key]">
                                         </div>
                                     </div>
                                 </div>
@@ -61,7 +76,7 @@
                 </div>
                 <div class="row">
                     <div class="large-2 columns">
-                        <p>@Html.ActionLink("Cancel", "CourseList", "Home", new { userid=ViewBag.TargetMember.RowKey }, new { @class = "button" })</p>
+                        <p>@Html.ActionLink("Cancel", "CourseList", "Home", new { userid=ViewBag.TargetMember["RowKey"] }, new { @class = "button" })</p>
                     </div>
                     <div class="large-10 columns">
                         <p><input type="button" id="saveProfile" value="saveProfile" /></p>
@@ -93,9 +108,13 @@
                     obj[$(v).attr("data-type")] = 1;
                 });
                 
-                window.location.href = "/Home/CourseList?userid=@ViewBag.TargetMember.RowKey&dac=" + JSON.stringify(obj);
+                window.location.href = "/Home/CourseList?userid=@ViewBag.TargetMember["RowKey"]&dac=" + JSON.stringify(obj);
 
             });
+
+        $("#profilePic").click(function () {
+            $("#editProfile").show();
+        });
         //});
     </script>
 

@@ -200,6 +200,9 @@
     <Compile Include="ActionData\ActionDataEnrollment.cs" />
     <Compile Include="ActionData\ActionDataPending.cs" />
     <Compile Include="ActionData\ActionDataAccepted.cs" />
+    <Compile Include="ActionData\ActionDataMediaResource.cs" />
+    <Compile Include="ActionData\ActionDataCourseMediaRelation.cs" />
+    <Compile Include="ActionData\ActionDataBlob.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -207,6 +210,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="DAO\BlobStorageConextBlobs.cs" />
+    <Compile Include="DAO\TableStorageConextCourseMediaRelations.cs" />
+    <Compile Include="DAO\TableStorageConextMediaResources.cs" />
     <Compile Include="DAO\TableStorageConextAccepteds.cs" />
     <Compile Include="DAO\TableStorageConextMembers.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -216,6 +222,8 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="DAO\TableStorageConextPendings.cs" />
     <Compile Include="Models\Accepted.cs" />
+    <Compile Include="Models\CourseMediaRelation.cs" />
+    <Compile Include="Models\MediaResource.cs" />
     <Compile Include="Models\Pending.cs" />
     <Compile Include="DAO\TableStorageConextEnrollments.cs" />
     <Compile Include="DAO\TableStorageConextCourses.cs" />
@@ -352,6 +360,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Home\Uploads\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -372,7 +381,7 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerPort>40652</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:82/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

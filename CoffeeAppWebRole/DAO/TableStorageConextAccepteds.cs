@@ -33,6 +33,12 @@ namespace CoffeeAppWebRole.DAO
             tableClient.CreateTableIfNotExist(AcceptedsTableName);
         }
 
+        public static Boolean IsTableExisted()
+        {
+            CloudTableClient tableClient = CloudStorageAccount().CreateCloudTableClient();
+            return tableClient.DoesTableExist(AcceptedsTableName);
+        }
+
         public TableStorageContextAccepteds () : base(CloudStorageAccount().TableEndpoint.ToString(), CloudStorageAccount().Credentials){
             
         }

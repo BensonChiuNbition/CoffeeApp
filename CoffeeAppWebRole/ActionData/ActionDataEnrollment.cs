@@ -40,35 +40,38 @@ namespace CoffeeAppWebRole.ActionData
 
         public void CreateTable()
         {
-            TableStorageContextEnrollments.CreateTableIfNotExist();
+            if (!TableStorageContextAccepteds.IsTableExisted())
+            {
+                TableStorageContextEnrollments.CreateTableIfNotExist();
 
-            var enrollment = new Enrollment()
-            {
-                //EnrollmentID = Guid.NewGuid().ToString(),
-                RowKey = Guid.NewGuid().ToString(),
-                MemberID = "t0009",
-                CourseID = "COFA03",
-                EnrollStatus = Enrollment.Status.None.ToString()
-            };
-            var enrollment2 = new Enrollment()
-            {
-                //EnrollmentID = Guid.NewGuid().ToString(),
-                RowKey = Guid.NewGuid().ToString(),
-                MemberID = "t0009",
-                CourseID = "COFB09",
-                EnrollStatus = Enrollment.Status.Past.ToString()
-            };
-            var enrollment3 = new Enrollment()
-            {
-                //EnrollmentID = Guid.NewGuid().ToString(),
-                RowKey = Guid.NewGuid().ToString(),
-                MemberID = "t0010",
-                CourseID = "COFB09",
-                EnrollStatus = Enrollment.Status.Past.ToString()
-            };
-            Context.AddEnrollment(enrollment);
-            Context.AddEnrollment(enrollment2);
-            Context.AddEnrollment(enrollment3);
+                var enrollment = new Enrollment()
+                {
+                    //EnrollmentID = Guid.NewGuid().ToString(),
+                    RowKey = Guid.NewGuid().ToString(),
+                    MemberID = "1",
+                    CourseID = "COFA03",
+                    EnrollStatus = Enrollment.Status.None.ToString()
+                };
+                var enrollment2 = new Enrollment()
+                {
+                    //EnrollmentID = Guid.NewGuid().ToString(),
+                    RowKey = Guid.NewGuid().ToString(),
+                    MemberID = "1",
+                    CourseID = "COFB09",
+                    EnrollStatus = Enrollment.Status.Past.ToString()
+                };
+                var enrollment3 = new Enrollment()
+                {
+                    //EnrollmentID = Guid.NewGuid().ToString(),
+                    RowKey = Guid.NewGuid().ToString(),
+                    MemberID = "2",
+                    CourseID = "COFB09",
+                    EnrollStatus = Enrollment.Status.Past.ToString()
+                };
+                Context.AddEnrollment(enrollment);
+                Context.AddEnrollment(enrollment2);
+                Context.AddEnrollment(enrollment3);
+            }
         }
     }
 }

@@ -20,33 +20,38 @@
                 int i = 0;
                 foreach (var member in ViewBag.Members)
                 {        
-                    <div class="large-6 columns classmate" data-context="@member.RowKey">
+                    <div class="large-6 columns classmate" data-context="@member["RowKey"]">
                         <div class="panel">
                             <div class="row">
                                 <div class="large-4 columns">
-                                    <img src="../Images/profile-photo.jpg" />
-
+                                    @if (member["DataAccessControlMap"]["ProfilePic"] == 1) {
+                                    <img src="Image/@member["RowKey"]" />
+                                    }
                                     
                                 </div>
                                 <div class="large-8 columns">
-                                    <h3>@member.NameEN</h3>
-                                    <p>Gender: @member.Gender</p>
-                                    <p>EMail: @member.EMail</p>
+                                    <h3>@member["NameEN"]</h3>
+                                    @foreach (var x in member["DataAccessControlMap"])
+                                    {
+                                        if (x.Value == 1) {
+                                            <p><b>@ViewBag.MemberInfoLabel[x.Key]</b> @member[x.Key]</p>
+                                        }
+                                    }
 
                                     <!--div class="rButton"><input type="button" id="friendRequest" value="Friend Request"/></!--div//-->
                                     
-                                    @if (ViewBag.FriendsRequestedPendingHashTable.ContainsKey(member.RowKey))
+                                    @if (ViewBag.FriendsRequestedPendingHashTable.ContainsKey(member["RowKey"]))
                                     {
                                     <div class="rRequestSent">Friend Request has been submitted.</div>
 
                                     }
-                                    else if (ViewBag.FriendsAcceptedHashTable.ContainsKey(member.RowKey))
+                                    else if (ViewBag.FriendsAcceptedHashTable.ContainsKey(member["RowKey"]))
                                     {
                                     <div class="rRequestSent">Friend accepted.</div>
                                     }
                                     else
                                     {
-                                    <div class="rButton">@Html.ActionLink("Friend Request", "CourseClassmateList", "Home", new { userid = myMemberId, courseid = @ViewBag.CourseID, requestmemberid = @member.RowKey }, new { @class = "button" })</div>
+                                    <div class="rButton">@Html.ActionLink("Friend Request", "CourseClassmateList", "Home", new { userid = myMemberId, courseid = @ViewBag.CourseID, requestmemberid = @member["RowKey"] }, new { @class = "button" })</div>
                                     
                                     }
                                 </div>
@@ -75,19 +80,11 @@
 @section featured2 {
     <script type="text/javascript">
         //$(function () {
-
-
             $("input#friendRequest").click(function () {
                 var $c = $(this).closest(".classmate");
-                console.log($c);
-
                 var requestMemberId = $c.attr("data-context");
                 $c.find(".rButton").hide();
                 $c.find(".rRequestSent").show();
-
-
-
-
             });
         //});
     </script>
