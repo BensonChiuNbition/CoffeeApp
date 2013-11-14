@@ -10,39 +10,45 @@
         @Scripts.Render("~/bundles/modernizr")
     </head>
     <body>
-        <header class="header">
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        @Html.Partial("_LoginPartial")
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
+        <div id="body">
+            <div class="cf">
+                <div class="row" style="background: rgb(128,80,32) url('../Images/coffee/top_bar_bg.jpg') no-repeat;height: 90px">
+                    <div class="large-4 columns" style="height:1px;"></div>
+                    <div class="large-4 columns " 
+                        style="height:180px; 
+background: url('../Images/coffee/site_logo.png') no-repeat center;
+background-size: 180px 180px;" id="siteLogo"></div>
+                    <div class="large-4 columns">
+
+                                         
+                            <ul id="menu">
+                                <li id="login">
+                                    
+                                        @Html.Partial("_LoginPartial")
+                                    
+                                </li>
+                                @*<li>@Html.ActionLink("Home", "Index", "Home")</li>
+                                <li>@Html.ActionLink("About", "About", "Home")</li>
+                                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>*@
+                            </ul>
+                  
+                    </div>
                 </div>
             </div>
-        </header>
-        <div id="body">
             @RenderSection("profile", required: false)
             @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
+            <section class="content-wrapper main-content clear-fix" style="background-color:">
                 @RenderBody()
             </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+
+            <div class="cf">
+                <div class="row" style="background: rgb(128,80,32) url('../Images/coffee/top_bar_bg.jpg') no-repeat;height: 50px">
+                    <div class="large-12 columns">
+                        <p style="color:#FFF;text-align:center">&copy; @DateTime.Now.Year - TOSAVOUR</p>
+                    </div>
                 </div>
             </div>
-        </footer>
+        </div>
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jqueryui")
@@ -50,5 +56,19 @@
         @RenderSection("scripts", required: false)
 
         @RenderSection("featured2", required: false)
+
+        <script type="text/javascript">
+            $("#siteLogo").click(function () {
+                window.location.href = "/Home/CourseList";
+            });
+
+            function disableBackButton() {
+                window.history.forward()
+            }
+            disableBackButton();
+            window.onload = disableBackButton();
+            window.onpageshow = function (evt) { if (evt.persisted) disableBackButton() }
+            window.onunload = function () { void (0) };
+        </script>
     </body>
 </html>

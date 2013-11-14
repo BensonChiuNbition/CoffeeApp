@@ -4,12 +4,15 @@
     ViewBag.Title = "Log in";
 }
 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
+            <div class="cf crs">
+                <div class="row">
+                    <div class="large-12 columns" style="margin:0;">
+    <h1 style="margin:0;">@ViewBag.Title</h1>
+                    </div>
+                </div>
+            </div>
 
 <section id="loginForm">
-<h2>Use a local account to log in.</h2>
 @using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -32,19 +35,17 @@
                 @Html.LabelFor(m => m.RememberMe, new { @class = "checkbox" })
             </li>
         </ol>
-        <input type="submit" value="Log in" />
+        <input type="submit" value="Log in" class="button" style="width:150px;"/>
     </fieldset>
     <p>
-        @Html.ActionLink("Register", "Register") if you don't have an account.
+        <a href="/Account/Register" style="color: #2795B6;">Register</a> if you don't have an account.
     </p>
 }
 </section>
 
-<section class="social" id="socialLoginForm">
-    <h2>Use another service to log in.</h2>
-    @Html.Action("ExternalLoginsList", new { ReturnUrl = ViewBag.ReturnUrl })
-</section>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $("#logoffClicks").hide();
+    </script>
 }

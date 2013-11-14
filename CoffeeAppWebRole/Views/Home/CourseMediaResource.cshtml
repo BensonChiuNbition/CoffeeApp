@@ -6,28 +6,29 @@
 
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
 
 
             <div class="cf" id ="courseMediaResource">
-                <h3>Videos</h3>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h1>@ViewBag.Title</h1>
+                    </div>
+                </div>
+
                 @foreach (var resource in ViewBag.MediaResourcesVideo)
                 {    
                 <div class="row">
                     <div class="large-12 columns">
                         <div class="panel">
                             <p>
-                                <iframe width="420" height="315" src="@resource.Path" frameborder="0" allowfullscreen></iframe>
+                                <iframe id="videoFrame" width="420" height="315" src="@resource.Path" frameborder="0" allowfullscreen></iframe>
                             </p>
                             <p>@resource.Description</p>
                         </div>
                     </div>
                 </div>
                  }
-                <h3>Photos</h3>
+
                 @foreach (var resource in ViewBag.MediaResourcesPhoto)
                 {    
                 <div class="row">
@@ -43,4 +44,18 @@
 
         </div>
     </section>
+}
+
+@section featured2 {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var winWidth = $(window).width();
+            if (winWidth >= 850) {
+                winWidth = 850;
+            }
+            var estWidth = Math.round(0.8 * winWidth);
+            var estHeight = Math.round(estWidth / 1.333);
+            $("#videoFrame").attr("width", estWidth).attr("height", estHeight);
+        });
+    </script>
 }

@@ -29,12 +29,59 @@ namespace CoffeeAppWebRole.ActionData
             return Context.GetMemberById(userid);
         }
 
-        public void UpdateMember_DataAccessControl(string userid, string dac)
+        public void UpdateMember_DataAccessControl(
+            string userid,
+            string ne,
+            string nc,
+            string gd,
+            string dob,
+            string em,
+            string ma,
+            string ph,
+            string oc,
+            string wa,
+            string dac)
         {
             Member m = Context.GetMemberById(userid);
+            m.NameEN = ne;
+            m.NameCH = nc;
+            m.Gender = gd;
+            m.DOB = dob;
+            m.EMail = em;
+            m.MailAddress = ma;
+            m.Phone = ph;
+            m.Occupation = oc;
+            m.WorkAddress = wa;
             m.DataAccessControl = dac;
 
+            if (Member.Status.Init.ToString().Equals(m.MemberStatus)){
+                m.MemberStatus = Member.Status.Normal.ToString();
+            }
+
             Context.UpdateMember(m);
+        }
+
+        public void AddMember(int mid, string ln, string pd, string ne, string nc)
+        {
+            var member = new Member()
+            {
+                RowKey = mid.ToString(),
+                LoginName = ln,
+                Password = pd,
+                NameEN = ne,
+                NameCH = nc,
+                Gender = "",
+                DOB = "",
+                Phone = "",
+                EMail = "",
+                MailAddress = "",
+                Occupation = "",
+                WorkAddress = "",
+                ProfilePic = "",
+                DataAccessControl = "{\"NameEN\":1,\"NameCH\":1,\"Gender\":1,\"DOB\":0,\"EMail\":1,\"MailAddress\":1,\"Phone\":1,\"Occupation\":0,\"WorkAddress\":0,\"ProfilePic\":1}",
+                MemberStatus = Member.Status.Init.ToString()
+            };
+            Context.AddMember(member);
         }
 
         public void CreateTable()

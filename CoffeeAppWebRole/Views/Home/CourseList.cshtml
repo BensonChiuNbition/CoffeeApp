@@ -10,29 +10,38 @@
         <div class="content-wrapper">
             <div class="cf">
                 <div class="row">
-                    <div class="large-5 columns">
-
-
-                        @foreach (var x in @ViewBag.Myself["DataAccessControlMap"])
-                                    {
-                                        if (x.Value == 1) {
-                                            <p><b>@ViewBag.MemberInfoLabel[x.Key]</b> @ViewBag.Myself[x.Key]</p>
-                                        }
-                                    }
-                        <p>@Html.ActionLink("Edit Profile", "Profile", "Home", new { userid = myMemberId }, new { @class = "button" })</p>
-
-
+                    <div class="large-12 columns" style="padding-left: 5%;">
+                        @if (ViewBag.Feedback != null){
+                        <p>@ViewBag.Feedback</p>   
+                        }
+                        <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
                     </div>
-                    <div class="large-3 large-offset-3 columns">
+                </div>
+                <div class="row">
+                    <div class="large-5 columns" style="padding-left: 5%;">
+
                         @if (ViewBag.Myself["DataAccessControlMap"]["ProfilePic"] == 1) {
-                        <img src="Image" />
+                            <div class="avatarframe">
+                                <img src="Image?t=@DateTime.UtcNow" />
+                            </div>
+                            <div style="margin: -15px 0 0 -25px">
+                                @Html.ActionLink(requestedPendingCount, "FriendMadeList", "Home", new { }, new { @class = " accepted" })
+                            </div>
                         }
                     </div>
-                    <div class="large-1 columns">
 
-                        <p>@Html.ActionLink(requestedPendingCount, "FriendMadeList", "Home", new { userid = myMemberId }, new { @class = "small button" })</p>
+                    <div class="large-7 columns">
 
+                        @foreach (var x in @ViewBag.Myself["DataAccessControlMap"])
+                        {
+                            if (x.Value == 1 && !"ProfilePic".Equals(x.Key) && !"".Equals(ViewBag.Myself[x.Key]))
+                            {
+                                <p><b>@ViewBag.MemberInfoLabel[x.Key]</b> @ViewBag.Myself[x.Key]</p>
+                            }
+                        }
+                        @Html.ActionLink("Edit Profile", "Profile", "Home", new {  }, new { @class = "button" })
                     </div>
+
                 </div>
             </div>
         </div>
@@ -44,8 +53,7 @@
     <section class="featured">
         <div class="content-wrapper">
             <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
+                <h1>@ViewBag.Title</h1>
             </hgroup>
 
 
@@ -58,16 +66,14 @@
                     <div class="large-6 columns @(ViewBag.EnrollmentInfos.ContainsKey(course.RowKey) ? ViewBag.EnrollmentInfos[course.RowKey] : "")">
                         <div class="panel">
                             <div class="row">
-                                <div class="large-8 columns">
+                                <div class="large-4 columns">
                                     <div class="statusgrid">&nbsp;</div>
+                                </div>
+                                <div class="large-8 columns">
+                                    
                                     <h3>@course.Name</h3>
                                     <p>@course.Description</p>
                                     <p>@Html.ActionLink("Course Info", "CourseInfo", "Home", new { userid = myMemberId , coursecode = @course.RowKey }, new { @class = "button" })</p>
-                                </div>
-                                <div class="large-4 columns">
-                                    <img src="../Images/coffee_wall.jpg" />
-
-                                    
                                 </div>
                             </div>
                         </div>
@@ -81,52 +87,8 @@
             }
                 </div>
             
-
-                @*
-                <div class="row">
-                    <div class="large-6 columns">
-                        <div class="panel">
-                            <div class="row">
-                                <div class="large-8 columns">
-                                    <h3>COFC13 - Coffee Tasting Level 1</h3>
-                                    <p>Mobile First. Now you can build for small devices first. Then, as devices get larger and larger, layer in more complexity. Semantic</p>
-                                    <p>@Html.ActionLink("Course Info", "CourseInfo", "Home", new { coursecode = "COFC13" }, new { @class = "button" })</p>
-                                </div>
-                                <div class="large-4 columns">
-                                    <img src="../Images/coffee_wall.jpg" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="large-6 columns">
-                        <div class="panel">
-                            <h3>COFC14 - Coffee Tasting Level 2</h3>
-                            <p>Mobile First. Now you can build for small devices first. Then, as devices get larger and larger, layer in more complexity. Semantic</p>
-                            <p class="linkto">@Html.ActionLink("Course Info", "CourseInfo", "Home", new { coursecode = "COFC13" }, new { @class = "button" })</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="large-6 columns">
-                        <div class="panel">
-                            <h3>COFC15 - Coffee Whatever</h3>
-                            <p>Now you can build for small devices first. Then, as devices get larger and larger, layer in more complexity. Semantic</p>
-                        </div>
-                    </div>
-                    <div class="large-6 columns">
-                        <div class="panel">
-                            <h3>COFC13 - Coffee Whatever Level 2</h3>
-                            <p>Mobile First. Now you can build for small devices first. Then, as devices get larger and larger, layer in more complexity. Semantic</p>
-                        </div>
-                    </div>
-                </div>
-                *@
             </div>
 
         </div>
     </section>
-}
-
-
-@section featured2 {
 }

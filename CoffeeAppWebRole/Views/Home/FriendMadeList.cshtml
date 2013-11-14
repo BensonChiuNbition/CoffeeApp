@@ -8,13 +8,13 @@
 
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-
 
             <div class="cf crs">
+                <div class="row">
+                    <div class="large-12 columns">
+                        <h1>@ViewBag.Title</h1>
+                    </div>
+                </div>
                 <div class="row">
             @{
                 int i = 0;
@@ -34,7 +34,8 @@
 
                                     @foreach (var x in member["DataAccessControlMap"])
                                     {
-                                        if (x.Value == 1) {
+                                        if (x.Value == 1 && !"ProfilePic".Equals(x.Key) && !"".Equals(member[x.Key])) 
+                                        {
                                             <p><b>@ViewBag.MemberInfoLabel[x.Key]</b> @member[x.Key]</p>
                                         }
                                     }
@@ -48,7 +49,7 @@
                                     }
                                     else if (ViewBag.FriendsRequestedPendingHashTable.ContainsKey(member["RowKey"]))
                                     {
-                                    <div class="rFriendAccepted">Friend Request has been submitted!</div>
+                                    <div class="rRequestSent">Friend Request has been submitted!</div>
 
                                     }
                                     else {

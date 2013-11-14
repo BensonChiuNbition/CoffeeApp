@@ -7,8 +7,12 @@
 }
 
     .cf .columns {
-        padding-left: 1%;
-        padding-right: 1%;
+        padding: 0 1% 0 1%;
+        margin: 0 0 0 0;
+    }
+
+    .cf.crs .columns {
+        margin: 0 0 18px 0;
     }
 
     .cf .panel {
@@ -16,13 +20,16 @@
         border-width: 1px;
         border-color: #d9d9d9;
         margin-bottom: 0;
-        padding: 1%;
-        background: #f2f2f2;
-        min-height: 250px;
+        padding: 2%;
+        background: url('../Images/coffee/class_info_box_01.png');
+        background-size: cover;
+        min-height: 300px;
     }
+
     .cf.course .panel {
         min-height: 250px;
     }
+
     .cf.friend .panel {
         min-height: 150px;
     }
@@ -51,7 +58,10 @@
     }
 
     .cf a.button {
-        margin: 0;
+        margin: 2% 0 0 0;
+    }
+    .cf a.button:hover {
+        margin: 2% 0 0 0;
     }
 
     .cf .row .row {
@@ -60,13 +70,18 @@
     }
 
     .cf .statusgrid {
-        float: left;
-        width:30px;
-        height: 30px;
-        border: 1px solid grey;
+        width: 92px;
+        height: 115px;
+        margin: 0 auto;
+        background: url('../Images/coffee/lesson_icon_02.png') no-repeat;
     }
+
     .cf .Past .statusgrid {
-        background-color: grey;
+        background: url('../Images/coffee/lesson_icon_01.png');
+    }
+
+    .cf .Current .statusgrid {
+        background: url('../Images/coffee/lesson_icon_03.png');
     }
 
 
@@ -74,37 +89,223 @@
     position: relative;
     width: 100%;
     background-color: #777;
-
 }
 
 #body {
+}
 
+.content-wrapper {
+    background-color: #603813;
+    color: #FFFFFF;
 }
 
 .profile {
     background-color: #fff;
 }
 
+
     .profile .content-wrapper {
+        /*
         background-color: #FFFFFF;
-        background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #7ac0da), color-stop(1, #a4d4e6));
-        background-image: -webkit-linear-gradient(left, rgba(228, 16, 236, 0.22) 0%, rgba(25, 159, 209, 0.84) 100%);
-        background-image: linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
-        color: #3e5667;
+        background-image: -webkit-gradient(
+	        linear,
+	        left bottom,
+	        left top,
+	        color-stop(0.36, #B87706),
+	        color-stop(0.66, #603813)
+        );
+        background-image: -o-linear-gradient(top, #B87706 36%, #603813 66%);
+        background-image: -moz-linear-gradient(top, #B87706 36%, #603813 66%);
+        background-image: -webkit-linear-gradient(top, #B87706 36%, #603813 66%);
+        background-image: -ms-linear-gradient(top, #B87706 36%, #603813 66%);
+        background-image: linear-gradient(to top, #B87706 36%, #603813 66%);
+        */
+        background-color: #603813;
+        color: #FFFFFF;
         padding: 10px;
+    }
+
+.profileInfo {
+    color: #FFFFFF;
+}
+
+    .profileInfo .row {
+        margin-bottom: 10px;
+    }
+
+    .profileInfo .inputRadios {
+        height: 30px;
+        line-height: 30px;
+    }
+
+    .profileInfo .profileLabel {
+        line-height: 30px;
+    }
+
+    .profileInfo input.inputradio {
+        width: 20px;
+    }
+
+    .profileInfo input.inputtext {
+        border-radius: 15px;
+        height: 30px;
+        line-height: 30px;
+        margin: 0 0 1% 0;
+    }
+
+    .profileInfo input.inputfile {
+        border-radius: 15px;
+        height: 30px;
+        line-height: 30px;
+        margin: 0 0 1% 0;
+        padding: 0 0 0 2%;
+        font-size: 12px;
+    }
+
+    .profileInfo .inputContainer {
     }
 
 
 div.toggler {
-  background: url(../Images/toggler.jpg) no-repeat left top;
-  height: 35px;
-  cursor: pointer;
+    background: url(../Images/coffee/toggle_off.png) no-repeat -5px top;
+    background-size: 100px 32px;
+    cursor: pointer;
+    width: 100px;
+    height: 32px;
 }
 
-div.toggler.on {
-  background: url(../Images/toggler.jpg) no-repeat left -35px;
-  height: 35px;
-  cursor: pointer;
+    div.toggler.on, div.toggler_demo {
+        background: url(../Images/coffee/toggle_on.png) no-repeat -5px top;
+        background-size: 100px 32px;
+        cursor: pointer;
+        width: 100px;
+        height: 32px;
+    }
+
+a.accepted {
+    background-color: none;
+    border: none;
+    background: url('../Images/coffee/small_button_50x50.png') no-repeat;
+    height: 50px;
+    width: 50px;
+    border-width: 1px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    line-height: normal;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    padding-top: 1em;
+    font-size: 1em;
+    color: white;
+}
+
+    a.accepted:hover {
+        background-color: none;
+        color: #000000;
+    }
+
+div.avatarframe img {
+    max-height: 300px;
+}
+
+label {
+    color: #FFFFFF;
+}
+
+
+
+#loginForm {
+    border: none;
+    width: 100%;
+}
+
+#RegisterForm2 {
+    width: 100%;
+}
+
+* {
+    font-family: "Tw Cen MT";
+}
+
+h1, h2, h3, .panel h3, .panel p {
+    font-family: "Tw Cen MT";
+    color: #FFFFFF;
+}
+
+.separator {
+    height: 1px;
+    width: 100%;
+}
+
+#RegisterForm2 input {
+    border-radius: 15px;
+}
+
+fieldset {
+    border: none;
+}
+
+#changePasswordForm input {
+    border-radius: 15px;
+}
+
+.button, input.button {
+    background-color: none;
+    background: url('../Images/coffee/green_button_small.png') no-repeat;
+    height: 50px;
+    width: 150px;
+    border: none;
+    color: #FFFFFF;
+    margin: 0 0 0 0;
+}
+
+.button {
+    padding: 14px 0 0 0;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    color: #FFFFFF;
+}
+
+input.button {
+    margin: 6% 0 0 0;
+    color: #FFFFFF;
+}
+
+    .button:hover, input.button:hover {
+        background-color: none;
+        background: url('../Images/coffee/green_button_small.png') no-repeat;
+        color: #FFFFFF;
+    }
+
+form {
+    margin: 0;
+}
+.topLeftContainer {
+    padding:5% 10% 0 0;
+    text-align: right;
+}
+.topLeftContainer a, .topLeftContainer a:hover {
+    background-size: 100% 40px;
+    width: 82px;
+    margin: 0;
+    padding: 8px 0 0 0 ;
+    border: none;
+}
+
+.rRequestSent {
+    color: yellow;
+    margin: 8px 0 0 0;
+    font-weight: bold;
+}
+.rFriendAccepted {
+    color: orange;
+    margin: 8px 0 0 0;
+    font-weight: bold;
+}
+
+#ui-datepicker-div {
+    background-color: beige;
 }

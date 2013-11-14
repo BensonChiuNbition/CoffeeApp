@@ -36,40 +36,26 @@ namespace CoffeeAppWebRole.Controllers
         public ActionResult Index()
         {
             //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
-            return RedirectToAction("Login", "Account");
+            if (!HasLocalAccount())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+            return RedirectToAction("CourseList", "Home");
+
             //return View();
-        }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your app description page.";
-
-            ADM.CreateTable();
-            ADC.CreateTable();
-            ADE.CreateTable();
-            ADP.CreateTable();
-            ADA.CreateTable();
-            ADMR.CreateTable();
-            ADCMR.CreateTable();
-
-            ADB.CreateBlobStorage();
-
-
-            
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-
-            return View();
         }
 
         private bool HasLocalAccount()
         {
-            return OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            try
+            {
+                return OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
+            }
+            catch (Exception e)
+            {
+
+            }
+            return false;
         }
 
         private string GetMemberId()
@@ -98,6 +84,7 @@ namespace CoffeeAppWebRole.Controllers
 
             return mapMember;
         }
+
         private Dictionary<string, object> GetMemberInfoMap(Member m)
         {
             Dictionary<string, object> mapMember = new Dictionary<string, object>();
@@ -113,27 +100,42 @@ namespace CoffeeAppWebRole.Controllers
             mapMember.Add("Phone", m.Phone);
             mapMember.Add("ProfilePic", "");
             mapMember.Add("DataAccessControlMap", GetDataAccessControlMap(m.DataAccessControl));
+            mapMember.Add("MemberStatus", m.MemberStatus);
 
             return mapMember;
         }
 
-        public ActionResult CourseList(string userid2, string dac)
+        public ActionResult CourseList(
+            string userid2, string ne, string nc, string gd, string dob,
+            string em, string ma, string ph, string oc, string wa, string dac, 
+            string feedback)
         {
+
             if (!HasLocalAccount())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             string userid = GetMemberId();
-       
 
 
-            ViewBag.Message = "Your course list page!";
+            Member m = ADM.GetMemberById(userid);
 
-            if (userid != null && dac != null)
+
+
+            //ViewBag.Message = "Your course list page!";
+
+            if (userid != null && ne != null && nc != null && gd != null && dob != null
+                && em != null && ma != null && ph != null && oc != null && wa != null && dac != null)
             {
-                ADM.UpdateMember_DataAccessControl(userid, dac);
+                ADM.UpdateMember_DataAccessControl(userid, ne, nc, gd, dob, em, ma, ph, oc, wa, dac);
             }
+
+            if (Member.Status.Init.ToString().Equals(m.MemberStatus))
+            {
+                return RedirectToAction("Profile", "Home");
+            }
+
 
 
             Dictionary<string,string> d = new Dictionary<string, string>();
@@ -158,9 +160,11 @@ namespace CoffeeAppWebRole.Controllers
             ViewBag.RequestedPendingCount = requestedPendingCount.ToString();
 
 
-            Member m = ADM.GetMemberById(userid);
+            
             ViewBag.Myself = GetMemberInfoMap(m);
             ViewBag.MemberInfoLabel = GetMemberInfoLabelMap();
+
+            ViewBag.Feedback = feedback;
 
             return View();
         }
@@ -169,7 +173,7 @@ namespace CoffeeAppWebRole.Controllers
         {
             if (!HasLocalAccount())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             string userid = GetMemberId();
@@ -200,7 +204,7 @@ namespace CoffeeAppWebRole.Controllers
         {
             if (!HasLocalAccount())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             string userid = GetMemberId();
@@ -246,7 +250,7 @@ namespace CoffeeAppWebRole.Controllers
         {
             if (!HasLocalAccount())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             string userid = GetMemberId();
@@ -324,7 +328,7 @@ namespace CoffeeAppWebRole.Controllers
         {
             if (!HasLocalAccount())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             string userid = GetMemberId();
@@ -425,7 +429,7 @@ namespace CoffeeAppWebRole.Controllers
         {
             if (!HasLocalAccount())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             string userid = GetMemberId();
@@ -433,7 +437,7 @@ namespace CoffeeAppWebRole.Controllers
             ViewBag.Message = "Your profile page.";
 
             Member m = ADM.GetMemberById(userid);
-
+            
             ViewBag.TargetMember = GetMemberInfoMap(m);
             ViewBag.MemberInfoLabel = GetMemberInfoLabelMap();
 
@@ -445,7 +449,7 @@ namespace CoffeeAppWebRole.Controllers
         {
             if (!HasLocalAccount())
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
             }
 
             string userId = id;
@@ -473,6 +477,32 @@ namespace CoffeeAppWebRole.Controllers
             return View();
         }
 
+        /*
+         * 
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your app description page.";
+
+            ADM.CreateTable();
+            ADC.CreateTable();
+            ADE.CreateTable();
+            ADP.CreateTable();
+            ADA.CreateTable();
+            ADMR.CreateTable();
+            ADCMR.CreateTable();
+
+            ADB.CreateBlobStorage();
+            
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+        
         public ActionResult UploadProfileImage()
         {
             if (!HasLocalAccount())
@@ -480,7 +510,6 @@ namespace CoffeeAppWebRole.Controllers
                 return RedirectToAction("Index", "Home");
             }
 
-            
             string userId = GetMemberId();
 
             try
@@ -497,10 +526,6 @@ namespace CoffeeAppWebRole.Controllers
 
                     var path = Path.Combine(dirUpload, fileName);
                     file.SaveAs(path);
-
-                    
-
-
                     
                     ADB.UploadBlob("pf_" + userId, path);
 
@@ -517,6 +542,66 @@ namespace CoffeeAppWebRole.Controllers
             }
 
             return RedirectToAction("Profile", "Home");
+        }
+        */
+
+        public ActionResult UploadProfile()
+        {
+            if (!HasLocalAccount())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            string userId = GetMemberId();
+
+            string ne = Request["NameEN"];
+            string nc = Request["NameCH"];
+            string gd = Request["Gender"];
+            string dob = Request["DOB"];
+            string em = Request["EMail"];
+            string ma = Request["MailAddress"];
+            string ph = Request["Phone"];
+            string oc = Request["Occupation"];
+            string wa = Request["WorkAddress"];
+            string dac = Request["dac"];
+
+            string fbk = Request["feedback"];
+
+            if (userId != null && ne != null && nc != null && gd != null && dob != null
+                && em != null && ma != null && ph != null && oc != null && wa != null && dac != null)
+            {
+                ADM.UpdateMember_DataAccessControl(userId, ne, nc, gd, dob, em, ma, ph, oc, wa, dac);
+            }
+
+            try
+            {
+                var file = Request.Files["file"];
+
+                if (file != null && file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+
+                    var dirUpload = Server.MapPath("./Uploads/" + userId + "/");
+
+                    Directory.CreateDirectory(dirUpload);
+
+                    var path = Path.Combine(dirUpload, fileName);
+                    file.SaveAs(path);
+
+                    ADB.UploadBlob("pf_" + userId, path);
+
+
+                    DirectoryInfo directory = new DirectoryInfo(dirUpload);
+                    foreach (FileInfo file2 in directory.GetFiles()) file2.Delete();
+                    directory.Delete(true);
+
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+            return RedirectToAction("CourseList", "Home", new { feedback = fbk });
         }
     }
 }

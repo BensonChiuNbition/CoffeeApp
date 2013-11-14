@@ -10,6 +10,7 @@ using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using CoffeeAppWebRole.Filters;
 using CoffeeAppWebRole.Models;
+using CoffeeAppWebRole.ActionData;
 
 namespace CoffeeAppWebRole.Controllers
 {
@@ -17,6 +18,8 @@ namespace CoffeeAppWebRole.Controllers
     [InitializeSimpleMembership]
     public class AccountController : Controller
     {
+        private ActionDataMember ADM = ActionDataMember.GetInstance();
+
         //
         // GET: /Account/Login
 
@@ -81,8 +84,13 @@ namespace CoffeeAppWebRole.Controllers
                 try
                 {
                     WebSecurity.CreateUserAndAccount(model.UserName, model.Password);
+
+                    int userId = WebSecurity.GetUserId(model.UserName);
+
+                    ADM.AddMember(userId, model.UserName, model.Password, model.NameEN, model.NameCH);
+
                     WebSecurity.Login(model.UserName, model.Password);
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Profile", "Home");
                 }
                 catch (MembershipCreateUserException e)
                 {

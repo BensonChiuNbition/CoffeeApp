@@ -2,89 +2,121 @@
     ViewBag.Title = "Profile";
 }
 
-@section profile {
-    <section class="profile">
-        <div class="content-wrapper">
-            <div class="cf">
-                <div class="row">
-                    <div class="large-3  columns">
-
-                        <img src="Image" id="profilePic" />
-
-
-                    </div>
-                    <div class="large-9 columns">
-                        <p>@ViewBag.MemberInfoLabel["RowKey"] @ViewBag.TargetMember["RowKey"]</p>
-                    </div>
-                </div>
-                <div class="row" id="editProfile" style="display:none;">
-                <form action="UploadProfileImage" method="post" enctype="multipart/form-data">
-                
-                    <div class="large-3  columns">
-
-                            <input type="file" name="file" />
-                        
-                    </div>
-                    <div class="large-9 columns">
-
-                        <input type="submit" value="Upload">
-                    </div>
-                
-                </form>
-                </div>
-            </div>
-        </div>
-    </section>
-}
-
 @section featured {
+
+
 
     <section class="featured">
         <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
 
 
+            <form action="UploadProfile" id="UploadProfileImage" method="post" enctype="multipart/form-data">
 
-            <div class="cf crs" id ="profileInfo">
+            <div class="cf profileInfo" id="profileInfo">
                 <div class="row">
                     <div class="large-12 columns">
-                        @foreach (var x in ViewBag.TargetMember["DataAccessControlMap"])
+                        <h1>@ViewBag.Title</h1>
+                        <p style="float:left; line-height: 30px;">Each context below can be shared to public by setting the toggle as </p>
+                        &nbsp;<div style="float:left; margin-left: 10px" class="toggler_demo">&nbsp;</div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="large-3 columns">
+                        <span class="profileLabel"><b>@ViewBag.MemberInfoLabel["RowKey"]</b></span>
+                    </div>
+                    <div class="large-9 columns inputContainer">
+                        <span class="profileLabel">@ViewBag.TargetMember["RowKey"]</span>
+                    </div>
+                </div>
+
+
+            @foreach (var x in ViewBag.TargetMember["DataAccessControlMap"])
+            {
+                if (!"ProfilePic".Equals(x.Key)) {
+                <div class="row">
+                    <div class="large-3 columns">
+                        <span class="profileLabel"><b>@ViewBag.MemberInfoLabel[x.Key]</b></span>
+                    </div>
+                    <div class="large-6 columns inputContainer">
+                        @if ("Gender".Equals(x.Key))
                         {
-                            <div class="row" style="margin-bottom: 2%">
-                                <div class="small-7 columns">
-                                    <div class="row">
-                                        <div class="large-6 columns">
-                                            <b>@ViewBag.MemberInfoLabel[x.Key]</b>
-                                        </div>
-                                        <div class="large-6 columns">
-                                            
-                                            <input type="text" name="@x.Key" value="@ViewBag.TargetMember[x.Key]">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="small-5 columns">
-                                    <div class="toggler @(x.Value==1 ? "on" : "")" data-type="@x.Key">&nbsp;</div>
-                                </div>
+                            if("M".Equals(ViewBag.TargetMember[x.Key])){
+                            <div class="inputRadios">
+                                <span><input type="radio" class="inputradio" name="@x.Key" value="M" checked="checked"/>Male</span>
+                                <span><input type="radio" class="inputradio" name="@x.Key" value="F" />Female</span>
                             </div>
+                            }else {
+                            <div class="inputRadios">
+                                <span><input type="radio" class="inputradio" name="@x.Key" value="M" />Male</span>
+                                <span><input type="radio" class="inputradio" name="@x.Key" value="F" checked="checked"/>Female</span>
+                            </div> 
+                            }
                         }
-
-
+                        else if ("DOB".Equals(x.Key)) {
+                            <input type="text" class="inputtext" name="@x.Key" value="@ViewBag.TargetMember[x.Key]" id="dobDatepicker" />
+                        }
+                        else
+                        {
+                            <input type="text" class="inputtext" name="@x.Key" value="@ViewBag.TargetMember[x.Key]">
+                        }
+                    </div>
+                    <div class="large-3 columns toggleContainer">
+                        <div class="toggler @(x.Value == 1 ? "on" : "")" data-type="@x.Key">&nbsp;</div>
+                    </div>
+                </div>
+                }
+                
+                if ("NameCH".Equals(x.Key)) 
+                {
+                <div class="row">
+                    <div class="large-3 columns">
+                        <span class="profileLabel"><b>Update Profile Pic</b></span>
+                    </div>
+                    <div class="large-6 columns inputContainer">
+                        <input type="file" class="inputfile" name="file" />                      
+                    </div>
+                    <div class="large-3 columns">
+                        <div class="toggler @(ViewBag.TargetMember["DataAccessControlMap"]["ProfilePic"] == 1 ? "on" : "")" data-type="ProfilePic">&nbsp;</div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="large-2 columns">
-                        <p>@Html.ActionLink("Cancel", "CourseList", "Home", new { userid=ViewBag.TargetMember["RowKey"] }, new { @class = "button" })</p>
+                    <div class="large-3 columns">
+                        <span class="profileLabel"><b>Current Profile Pic</b></span>
                     </div>
-                    <div class="large-10 columns">
-                        <p><input type="button" id="saveProfile" value="saveProfile" /></p>
-                        @*<p>@Html.ActionLink("Save", "CourseList", "Home", new { userid=ViewBag.TargetMember.RowKey, dac="whatever" }, new { @class = "button", @id = "saveProfile" })</p>*@
+                    <div class="large-6 columns">
+                        <div class="avartarframe">
+                            <img src="Image?t=@DateTime.UtcNow" id="profilePic" />
+                        </div>                        
+                    </div>
+                    <div class="large-3 columns">&nbsp;</div>
+                </div>
+                }
+                
+            }
+
+
+
+                <div class="row">
+                    <div class="large-3 columns">
+                    
+                        <input type="hidden" name="dac" class="dacc"/>
+                        <input type="hidden" name="feedback" value="Your profile info is updated."/>
+
+
+                        <p><input type="submit" value="Save Profile" class="button" id="submit2"></p>
+                        @*<p><input type="button" class="button" id="saveProfile" value="Save Profile" /></p>*@
+                    </div>
+                    <div class="large-9 columns">
+                        @if (!"Init".Equals(ViewBag.TargetMember["MemberStatus"]))
+                        {
+                        <p>@Html.ActionLink("Cancel", "CourseList", "Home", new { }, new { @class = "button" })</p>
+                        }                    
                     </div>
                 </div>
-            </div>
 
+            </div>
+            </form>
         </div>
     </section>
 }
@@ -93,29 +125,60 @@
 @section featured2 {
 
     <script type="text/javascript">
-        //$(function () {
-            $("div.toggler").click(function () {
-                $(this).toggleClass("on");
-            });
-
-            $("input#saveProfile").click(function () {
-
-                var j = '{"NameEN":0,"NameCH":0,"Gender":0,"DOB":0,"EMail":0,"MailAddress":0,"Phone":0,"Occupation":0,"WorkAddress":0,"ProfilePic":0}';
-                var obj = JSON.parse(j);
-                
-                var $onItems = $("#profileInfo").find(".toggler.on");
-                $.each($onItems, function (k, v) {
-                    obj[$(v).attr("data-type")] = 1;
-                });
-                
-                window.location.href = "/Home/CourseList?userid=@ViewBag.TargetMember["RowKey"]&dac=" + JSON.stringify(obj);
-
-            });
-
-        $("#profilePic").click(function () {
-            $("#editProfile").show();
+        
+        $("div.toggler").click(function () {
+            $(this).toggleClass("on");
         });
-        //});
+
+        $("input#submit2").click(function () {
+
+            var j = '{"NameEN":0,"NameCH":0,"Gender":0,"DOB":0,"EMail":0,"MailAddress":0,"Phone":0,"Occupation":0,"WorkAddress":0,"ProfilePic":0}';
+            var obj = JSON.parse(j);
+
+            var $p = $("#profileInfo");
+
+            var $onItems = $p.find(".toggler.on");
+            $.each($onItems, function (k, v) {
+                obj[$(v).attr("data-type")] = 1;
+            });
+
+            $(".dacc").val(JSON.stringify(obj));
+        });
+
+        $("#dobDatepicker").datepicker({
+            changeMonth: true,
+            changeYear: true,
+            yearRange: '1900:'
+        });
+        @*
+        $("input#saveProfile").click(function () {
+
+            var j = '{"NameEN":0,"NameCH":0,"Gender":0,"DOB":0,"EMail":0,"MailAddress":0,"Phone":0,"Occupation":0,"WorkAddress":0,"ProfilePic":0}';
+            var obj = JSON.parse(j);
+
+            var $p = $("#profileInfo");
+
+            var $onItems = $p.find(".toggler.on");
+            $.each($onItems, function (k, v) {
+                obj[$(v).attr("data-type")] = 1;
+            });
+
+            var q = '?ne=' + $p.find('input[name=NameEN]').val()
+                + '&nc=' + $p.find('input[name=NameCH]').val()
+                + '&gd=' + $p.find('input:radio[name=Gender]:checked').val()
+                + '&dob=' + $p.find('input[name=DOB]').val()
+                + '&em=' + $p.find('input[name=EMail]').val()
+                + '&ma=' + $p.find('input[name=MailAddress]').val()
+                + '&ph=' + $p.find('input[name=Phone]').val()
+                + '&oc=' + $p.find('input[name=Occupation]').val()
+                + '&wa=' + $p.find('input[name=WorkAddress]').val()
+                + '&dac=' + JSON.stringify(obj);
+
+            window.location.href = "/Home/CourseList" + q;
+
+        });
+        *@
+        
     </script>
 
 }

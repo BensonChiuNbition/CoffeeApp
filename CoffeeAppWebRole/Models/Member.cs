@@ -8,6 +8,8 @@ namespace CoffeeAppWebRole.Models
 {
     public class Member : TableServiceEntity
     {
+        public enum Status { Init, Normal, Special, Staff, Suspend };
+
         public Member() {
             base.PartitionKey = "Cafe";
             base.RowKey = Guid.NewGuid().ToString();
@@ -34,6 +36,7 @@ namespace CoffeeAppWebRole.Models
         public string WorkAddress { get; set; }
         public string ProfilePic { get; set; }
         public string DataAccessControl { get; set; }
+        public string MemberStatus { get; set; }
 
         //public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
