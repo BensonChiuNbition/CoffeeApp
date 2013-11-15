@@ -62,7 +62,7 @@ namespace CoffeeAppWebRole.DAO
         public MediaResource GetMediaResourceById(string id)
         {
             var query = from mediaResource in this.CreateQuery<MediaResource>(MediaResourcesTableName)
-                        where mediaResource.PartitionKey == "Cafe" && mediaResource.RowKey == id
+                        where mediaResource.PartitionKey == "Cafe" && mediaResource.MediaID == id
                         select mediaResource;
             MediaResource cs = null;
             foreach (var c in query)
@@ -70,19 +70,6 @@ namespace CoffeeAppWebRole.DAO
                 cs = c;
             }
             return cs;
-        }
-
-        public void ListMediaResources()
-        {
-            var query = from mediaResource in this.CreateQuery<MediaResource>(MediaResourcesTableName)
-                        where mediaResource.PartitionKey == "Cafe"
-                        select mediaResource;
-            
-            foreach (var c in query)
-            {
-                Debug.WriteLine("c: {0} {1} {2}", c.RowKey, c.Description, c.MediaType);
-            }
-
         }
     }
 }

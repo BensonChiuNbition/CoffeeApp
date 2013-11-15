@@ -44,7 +44,7 @@ namespace CoffeeAppWebRole.ActionData
                 {
                     //CourseID = "COFA00",
                     //RowKey = Guid.NewGuid().ToString(),
-                    RowKey = "COFA03",
+                    CourseID = "COFA03",
                     Name = "Tasting Session Level 1",
                     Description = "Cupping is one of the coffee tasting techniques used by cuppers to evaluate coffee aroma and the flavor profile of a coffee. To understand the minor differences between coffee growing regions, it is important to taste coffee from around the world side-by-side.",
                     DateStart = "2013/11/20",
@@ -57,7 +57,7 @@ namespace CoffeeAppWebRole.ActionData
                 {
                     //CourseID = "COFA00",
                     //RowKey = Guid.NewGuid().ToString(),
-                    RowKey = "COFB07",
+                    CourseID = "COFB07",
                     Name = "Coffee History",
                     Description = "The Ethiopian ancestors of today's Oromo ethnic group, were the first to have recognized the energizing effect of the native coffee plant.",
                     DateStart = "2013/11/10",
@@ -70,7 +70,7 @@ namespace CoffeeAppWebRole.ActionData
                 {
                     //CourseID = "COFA00",
                     //RowKey = Guid.NewGuid().ToString(),
-                    RowKey = "COFB09",
+                    CourseID = "COFB09",
                     Name = "Coffee History 2",
                     Description = "The Ethiopian ancestors of today's Oromo ethnic group, were the first to have recognized the energizing effect of the native coffee plant.",
                     DateStart = "2013/11/10",

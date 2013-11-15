@@ -24,7 +24,7 @@ namespace CoffeeAppWebRole.Models
             //this.MediaID = rowKey;
         }
 
-        //public string MediaResourceID { get; set; }
+        public string MediaID { get; set; }
         public string MediaType{ get; set; }
         public string Path { get; set; }
         public string Description { get; set; }

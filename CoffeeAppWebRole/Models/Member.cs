@@ -22,7 +22,7 @@ namespace CoffeeAppWebRole.Models
             //this.MemberID = rowKey;
         }
 
-        //public string MemberID { get; set; }
+        public string MemberID { get; set; }
         public string NameEN { get; set; }
         public string NameCH { get; set; }
         public string Gender { get; set; }
@@ -37,7 +37,5 @@ namespace CoffeeAppWebRole.Models
         public string ProfilePic { get; set; }
         public string DataAccessControl { get; set; }
         public string MemberStatus { get; set; }
-
-        //public virtual ICollection<Enrollment> Enrollments { get; set; }
     }
 }

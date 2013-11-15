@@ -63,7 +63,7 @@ namespace CoffeeAppWebRole.DAO
         public Course GetCourseById(string id)
         {
             var query = from course in this.CreateQuery<Course>(CoursesTableName)
-                        where course.PartitionKey == "Cafe" && course.RowKey == id
+                        where course.PartitionKey == "Cafe" && course.CourseID == id
                         select course;
             Course cs = null;
             foreach (var c in query)
@@ -71,19 +71,6 @@ namespace CoffeeAppWebRole.DAO
                 cs = c;
             }
             return cs;
-        }
-
-        public void ListCourses()
-        {
-            var query = from course in this.CreateQuery<Course>(CoursesTableName)
-                        where course.PartitionKey == "Cafe"
-                        select course;
-            
-            foreach (var c in query)
-            {
-                Debug.WriteLine("c: {0} {1} {2}", c.RowKey, c.Name, c.Instructor);
-            }
-
         }
     }
 }

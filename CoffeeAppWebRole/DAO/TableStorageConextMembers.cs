@@ -63,7 +63,7 @@ namespace CoffeeAppWebRole.DAO
         public Member GetMemberById(string id)
         {
             var query = from member in this.CreateQuery<Member>(MembersTableName)
-                        where member.PartitionKey == "Cafe" && member.RowKey == id
+                        where member.PartitionKey == "Cafe" && member.MemberID == id
                         select member;
             Member mb = null;
             foreach (var m in query)
@@ -71,19 +71,6 @@ namespace CoffeeAppWebRole.DAO
                 mb = m;
             }
             return mb;
-        }
-
-        public void ListMembers()
-        {
-            var query = from member in this.CreateQuery<Member>(MembersTableName)
-                        where member.PartitionKey == "Cafe"
-                        select member;
-            
-            foreach (var m in query)
-            {
-                Debug.WriteLine("d: {0} {1} {2}", m.RowKey, m.NameEN, m.NameCH);
-            }
-
         }
     }
 }

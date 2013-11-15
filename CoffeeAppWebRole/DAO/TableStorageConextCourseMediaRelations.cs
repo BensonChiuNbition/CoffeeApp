@@ -89,18 +89,5 @@ namespace CoffeeAppWebRole.DAO
                         select courseMediaRelation;
             return query;
         }
-
-        public void ListCourseMediaRelations()
-        {
-            var query = from courseMediaRelation in this.CreateQuery<CourseMediaRelation>(CourseMediaRelationsTableName)
-                        where courseMediaRelation.PartitionKey == "Cafe"
-                        select courseMediaRelation;
-            
-            foreach (var n in query)
-            {
-                Debug.WriteLine("c: {0} {1} {2}", n.RowKey, n.CourseID, n.MediaID);
-            }
-
-        }
     }
 }

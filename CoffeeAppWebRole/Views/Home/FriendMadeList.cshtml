@@ -20,12 +20,12 @@
                 int i = 0;
                 foreach (var member in ViewBag.Members)
                 {        
-                    <div class="large-6 columns classmate" data-context="@member["RowKey"]">
+                    <div class="large-6 columns classmate" data-context="@member["MemberID"]">
                         <div class="panel">
                             <div class="row">
                                 <div class="large-4 columns">
                                     @if (member["DataAccessControlMap"]["ProfilePic"] == 1) {
-                                    <img src="Image/@member["RowKey"]" />
+                                    <img src="Image/@member["MemberID"]" />
                                     }
                                     
                                 </div>
@@ -42,18 +42,18 @@
 
                                     <!--div class="rButton"><input type="button" id="friendRequest" value="Friend Request"/></!--div//-->
                                     
-                                    @if (ViewBag.FriendsFriendedAcceptedHashTable.ContainsKey(member["RowKey"]))
+                                    @if (ViewBag.FriendsFriendedAcceptedHashTable.ContainsKey(member["MemberID"]))
                                     {
                                     <div class="rFriendAccepted">Friend accepted.</div>
 
                                     }
-                                    else if (ViewBag.FriendsRequestedPendingHashTable.ContainsKey(member["RowKey"]))
+                                    else if (ViewBag.FriendsRequestedPendingHashTable.ContainsKey(member["MemberID"]))
                                     {
                                     <div class="rRequestSent">Friend Request has been submitted!</div>
 
                                     }
                                     else {
-                                    <div class="rButton">@Html.ActionLink("Friend Accepted", "FriendMadeList", "Home", new { userid = @myMemberId, acceptmemberid=@member["RowKey"] }, new { @class = "button" })</div>
+                                    <div class="rButton">@Html.ActionLink("Friend Accepted", "FriendMadeList", "Home", new { userid = @myMemberId, acceptmemberid=@member["MemberID"] }, new { @class = "button" })</div>
                                     
                                     }
 

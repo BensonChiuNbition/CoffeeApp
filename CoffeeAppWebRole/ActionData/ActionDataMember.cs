@@ -65,7 +65,7 @@ namespace CoffeeAppWebRole.ActionData
         {
             var member = new Member()
             {
-                RowKey = mid.ToString(),
+                MemberID = mid.ToString(),
                 LoginName = ln,
                 Password = pd,
                 NameEN = ne,
@@ -92,7 +92,7 @@ namespace CoffeeAppWebRole.ActionData
 
                 var member = new Member()
                 {
-                    RowKey = "1",
+                    MemberID = "1",
                     LoginName = "glam",
                     Password = "abc123",
                     NameEN = "GG Lam",
@@ -109,7 +109,7 @@ namespace CoffeeAppWebRole.ActionData
                 };
                 var member2 = new Member()
                 {
-                    RowKey = "2",
+                    MemberID = "2",
                     LoginName = "jsc",
                     Password = "abc123",
                     NameEN = "Jessica C",
@@ -126,7 +126,7 @@ namespace CoffeeAppWebRole.ActionData
                 };
                 var member3 = new Member()
                 {
-                    RowKey = "3",
+                    MemberID = "3",
                     LoginName = "jmt",
                     Password = "abc123",
                     NameEN = "Jimmy Tang",
@@ -143,7 +143,7 @@ namespace CoffeeAppWebRole.ActionData
                 };
                 var member4 = new Member()
                 {
-                    RowKey = "4",
+                    MemberID = "4",
                     LoginName = "tjd",
                     Password = "abc123",
                     NameEN = "Judy Tong",

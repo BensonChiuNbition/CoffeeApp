@@ -42,28 +42,28 @@ namespace CoffeeAppWebRole.ActionData
 
                 var media = new MediaResource()
                 {
-                    RowKey = "v1111",
+                    MediaID = "v1111",
                     Description = "A testing video",
                     MediaType = MediaResource.TypeMedia.VideoHttp.ToString(),
                     Path = "http://www.youtube.com/embed/2Ao5b6uqI40"
                 };
                 var media2 = new MediaResource()
                 {
-                    RowKey = "v1112",
+                    MediaID = "v1112",
                     Description = "Easy：簡易咖啡拉花教學",
                     MediaType = MediaResource.TypeMedia.VideoHttp.ToString(),
                     Path = "http://www.youtube.com/embed/GSS2Oa2WhI8"
                 };
                 var media3 = new MediaResource()
                 {
-                    RowKey = "m1111",
+                    MediaID = "m1111",
                     Description = "Love Coffee",
                     MediaType = MediaResource.TypeMedia.PhotoHttp.ToString(),
                     Path = "http://upload.wikimedia.org/wikipedia/commons/f/f8/Love_Coffee.jpg"
                 };
                 var media4 = new MediaResource()
                 {
-                    RowKey = "m1112",
+                    MediaID = "m1112",
                     Description = "Black Coffee",
                     MediaType = MediaResource.TypeMedia.PhotoHttp.ToString(),
                     Path = "http://upload.wikimedia.org/wikipedia/commons/4/45/A_small_cup_of_coffee.JPG"

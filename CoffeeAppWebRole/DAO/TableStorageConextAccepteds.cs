@@ -76,18 +76,5 @@ namespace CoffeeAppWebRole.DAO
                         select accepted;
             return query;
         }
-
-        public void ListAccepteds()
-        {
-            var query = from accepted in this.CreateQuery<Accepted>(AcceptedsTableName)
-                        where accepted.PartitionKey == "Cafe"
-                        select accepted;
-            
-            foreach (var n in query)
-            {
-                Debug.WriteLine("c: {0} {1} {2}", n.RowKey, n.MemberID1, n.MemberID2);
-            }
-
-        }
     }
 }

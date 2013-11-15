@@ -35,6 +35,7 @@ namespace CoffeeAppWebRole.Controllers
 
         public ActionResult Index()
         {
+            
             //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             if (!HasLocalAccount())
             {
@@ -70,7 +71,7 @@ namespace CoffeeAppWebRole.Controllers
         private Dictionary<string, object> GetMemberInfoLabelMap()
         {
             Dictionary<string, object> mapMember = new Dictionary<string, object>();
-            mapMember.Add("RowKey", "Member ID");
+            mapMember.Add("MemberID", "Member ID");
             mapMember.Add("NameEN", "Name");
             mapMember.Add("NameCH", "Chinese Name");
             mapMember.Add("Gender", "Gender");
@@ -88,7 +89,7 @@ namespace CoffeeAppWebRole.Controllers
         private Dictionary<string, object> GetMemberInfoMap(Member m)
         {
             Dictionary<string, object> mapMember = new Dictionary<string, object>();
-            mapMember.Add("RowKey", m.RowKey);
+            mapMember.Add("MemberID", m.MemberID);
             mapMember.Add("NameEN", m.NameEN);
             mapMember.Add("NameCH", m.NameCH);
             mapMember.Add("Gender", m.Gender);
@@ -135,6 +136,37 @@ namespace CoffeeAppWebRole.Controllers
             {
                 return RedirectToAction("Profile", "Home");
             }
+
+
+
+            Dictionary<string, int> t3 = new Dictionary<string, int>();
+            IQueryable<Pending> requestedPending = ADP.GetTargetedMembersA_RequestedPending(userid);
+            foreach (var q in requestedPending)
+            {
+                Member m2 = ADM.GetMemberById(q.BMemberID);
+                string[] s = { m2.MemberID, userid };
+                Array.Sort(s, StringComparer.InvariantCulture);
+                if (!t3.ContainsKey(s[0] + "|" + s[1]))
+                {
+                    t3[s[0] + "|" + s[1]] = 0;
+                }
+            }
+            requestedPending = ADP.GetTargetedMembersB_RequestedPending(userid);
+            foreach (var q in requestedPending)
+            {
+                Member m2 = ADM.GetMemberById(q.AMemberID);
+                string[] s = { m2.MemberID, userid };
+                Array.Sort(s, StringComparer.InvariantCulture);
+
+                if (t3.ContainsKey(s[0] + "|" + s[1]))
+                {
+                    ADA.AddAccepted(s[0], s[1]);
+                    ADP.DeletePending(s[0], s[1]);
+                }
+            }
+
+
+
 
 
 
@@ -188,7 +220,7 @@ namespace CoffeeAppWebRole.Controllers
             }
 
             Course c = ADC.GetCourseById(courseCode);
-            ViewBag.CourseID = c.RowKey;
+            ViewBag.CourseID = c.CourseID;
             ViewBag.Name = c.Name;
             ViewBag.Description = c.Description;
             ViewBag.DateStart = c.DateStart;
@@ -308,9 +340,9 @@ namespace CoffeeAppWebRole.Controllers
                         m = ADM.GetMemberById(q.MemberID1);
                     }
 
-                    if (!t2.ContainsKey(m.RowKey))
+                    if (!t2.ContainsKey(m.MemberID))
                     {
-                        t2.Add(m.RowKey, null);
+                        t2.Add(m.MemberID, null);
                     }
                 }
             }
@@ -400,9 +432,9 @@ namespace CoffeeAppWebRole.Controllers
                         m = ADM.GetMemberById(q.MemberID1);
                     }
 
-                    if (!t.ContainsKey(m.RowKey))
+                    if (!t.ContainsKey(m.MemberID))
                     {
-                        t.Add(m.RowKey, null);
+                        t.Add(m.MemberID, null);
                     }
                 }
 

@@ -101,18 +101,5 @@ namespace CoffeeAppWebRole.DAO
                         select pending;
             return query;
         }
-
-        public void ListPendings()
-        {
-            var query = from pending in this.CreateQuery<Pending>(PendingsTableName)
-                        where pending.PartitionKey == "Cafe"
-                        select pending;
-            
-            foreach (var n in query)
-            {
-                Debug.WriteLine("c: {0} {1} {2} {3}", n.RowKey, n.AMemberID, n.BMemberID, n.BStatus);
-            }
-
-        }
     }
 }

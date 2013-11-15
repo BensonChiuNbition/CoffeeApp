@@ -63,7 +63,7 @@
                 int i = 0;
                 foreach (var course in ViewBag.Courses)
                 {        
-                    <div class="large-6 columns @(ViewBag.EnrollmentInfos.ContainsKey(course.RowKey) ? ViewBag.EnrollmentInfos[course.RowKey] : "")">
+                    <div class="large-6 columns @(ViewBag.EnrollmentInfos.ContainsKey(course.CourseID) ? ViewBag.EnrollmentInfos[course.CourseID] : "")">
                         <div class="panel">
                             <div class="row">
                                 <div class="large-4 columns">
@@ -73,7 +73,7 @@
                                     
                                     <h3>@course.Name</h3>
                                     <p>@course.Description</p>
-                                    <p>@Html.ActionLink("Course Info", "CourseInfo", "Home", new { userid = myMemberId , coursecode = @course.RowKey }, new { @class = "button" })</p>
+                                    <p>@Html.ActionLink("Course Info", "CourseInfo", "Home", new { userid = myMemberId , coursecode = @course.CourseID }, new { @class = "button" })</p>
                                 </div>
                             </div>
                         </div>

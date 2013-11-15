@@ -22,7 +22,7 @@ namespace CoffeeAppWebRole.Models
             //this.CourseID = rowKey;
         }
 
-        //public string CourseID { get; set; }
+        public string CourseID { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string DateStart { get; set; }

@@ -90,20 +90,5 @@ namespace CoffeeAppWebRole.DAO
             }
             return byteArray;
         }
-
-        /*
-        public void ListEnrollments()
-        {
-            var query = from enrollment in this.CreateQuery<Enrollment>(EnrollmentsTableName)
-                        where enrollment.PartitionKey == "Cafe"
-                        select enrollment;
-            
-            foreach (var n in query)
-            {
-                Debug.WriteLine("c: {0} {1} {2}", n.RowKey, n.CourseID, n.MemberID, n.EnrollStatus);
-            }
-
-        }
-         * */
     }
 }
