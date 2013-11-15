@@ -3,14 +3,14 @@
     ViewBag.Title = "Manage Account";
 }
 
-            <div class="cf crs">
-                <div class="row">
-                    <div class="large-12 columns">
-    <h1>@ViewBag.Title.</h1>
-                    </div>
-                </div>
-            </div>
-
+<div class="cf crs">
+    <div class="row">
+        <div class="large-12 columns">
+            <h1>@ViewBag.Title.</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="large-6 columns">
 <p class="message-success">@ViewBag.StatusMessage</p>
 
 <p>You're logged in as <strong>@User.Identity.Name</strong>.</p>
@@ -23,6 +23,12 @@ else
 { 
     @Html.Partial("_SetPasswordPartial")
 }
+        </div>
+        <div class="large-6 columns">&nbsp;</div>
+    </div>
+</div>
+
+
 
 @*<section id="externalLogins">
     @Html.Action("RemoveExternalLogins")

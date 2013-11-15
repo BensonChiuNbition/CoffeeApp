@@ -21,6 +21,7 @@
                                     <div class="statusgrid">&nbsp;</div>
                                 </div>
                                 <div class="large-10 columns">
+                                    <p style="font-weight: bold; color:yellow;">@ViewBag.Feedback</p>
                                     <h3>@ViewBag.CourseID - @ViewBag.Name</h3>
                                     <p><b>Date:</b> @ViewBag.DateStart - @ViewBag.DateEnd</p>
                                     <p><b>Time:</b> @ViewBag.CourseDateTime</p>
@@ -31,11 +32,18 @@
                                     <p>@Html.ActionLink("Course Media", "CourseMediaResource", "Home", new { courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
                                     <p>@Html.ActionLink("Your Classmates", "CourseClassmateList", "Home", new { userid=myMemberId, courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
                                     }else if ("".Equals(ViewBag.EnrollmentInfo)){
-                                    <p>@Html.ActionLink("Course Submit", "CourseSubmit", "Home", new { courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
+                                    <p><a href="http://tosavour.simplybook.me/index/about" class="button">Register Now</a></p>
+                                    <p>@Html.ActionLink("I've attended this course", "CourseSubmit", "Home", new { courseid = @ViewBag.CourseID }, new { @class = "button", style="line-height:12px;" })</p>
                                     }
+                                    
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="large-12 columns">
+                        <p>@Html.ActionLink("Back to Course List", "CourseList", "Home", new { coursecode = @ViewBag.CourseID }, new { @class = "button" })</p>                                
                     </div>
                 </div>
             </div>

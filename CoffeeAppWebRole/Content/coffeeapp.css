@@ -21,7 +21,7 @@
         border-color: #d9d9d9;
         margin-bottom: 0;
         padding: 2%;
-        background: url('../Images/coffee/class_info_box_01.png');
+        background: url('/Images/coffee/class_info_box_01.png');
         background-size: cover;
         min-height: 300px;
     }
@@ -73,15 +73,15 @@
         width: 92px;
         height: 115px;
         margin: 0 auto;
-        background: url('../Images/coffee/lesson_icon_02.png') no-repeat;
+        background: url('/Images/coffee/lesson_icon_02.png') no-repeat;
     }
 
     .cf .Past .statusgrid {
-        background: url('../Images/coffee/lesson_icon_01.png');
+        background: url('/Images/coffee/lesson_icon_01.png');
     }
 
     .cf .Current .statusgrid {
-        background: url('../Images/coffee/lesson_icon_03.png');
+        background: url('/Images/coffee/lesson_icon_03.png');
     }
 
 
@@ -167,7 +167,7 @@
 
 
 div.toggler {
-    background: url(../Images/coffee/toggle_off.png) no-repeat -5px top;
+    background: url(/Images/coffee/toggle_off.png) no-repeat -5px top;
     background-size: 100px 32px;
     cursor: pointer;
     width: 100px;
@@ -175,7 +175,7 @@ div.toggler {
 }
 
     div.toggler.on, div.toggler_demo {
-        background: url(../Images/coffee/toggle_on.png) no-repeat -5px top;
+        background: url(/Images/coffee/toggle_on.png) no-repeat -5px top;
         background-size: 100px 32px;
         cursor: pointer;
         width: 100px;
@@ -185,7 +185,7 @@ div.toggler {
 a.accepted {
     background-color: none;
     border: none;
-    background: url('../Images/coffee/small_button_50x50.png') no-repeat;
+    background: url('/Images/coffee/small_button_50x50.png') no-repeat;
     height: 50px;
     width: 50px;
     border-width: 1px;
@@ -219,7 +219,6 @@ label {
 
 #loginForm {
     border: none;
-    width: 100%;
 }
 
 #RegisterForm2 {
@@ -254,7 +253,7 @@ fieldset {
 
 .button, input.button {
     background-color: none;
-    background: url('../Images/coffee/green_button_small.png') no-repeat;
+    background: url('/Images/coffee/green_button_small.png') no-repeat;
     height: 50px;
     width: 150px;
     border: none;
@@ -276,7 +275,7 @@ input.button {
 
     .button:hover, input.button:hover {
         background-color: none;
-        background: url('../Images/coffee/green_button_small.png') no-repeat;
+        background: url('/Images/coffee/green_button_small.png') no-repeat;
         color: #FFFFFF;
     }
 

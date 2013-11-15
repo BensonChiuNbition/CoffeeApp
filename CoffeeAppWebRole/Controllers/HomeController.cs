@@ -85,8 +85,13 @@ namespace CoffeeAppWebRole.Controllers
 
             return mapMember;
         }
-
+        
         private Dictionary<string, object> GetMemberInfoMap(Member m)
+        {
+            return GetMemberInfoMap(m, true);
+        }
+        
+        private Dictionary<string, object> GetMemberInfoMap(Member m, Boolean isAccepted)
         {
             Dictionary<string, object> mapMember = new Dictionary<string, object>();
             mapMember.Add("MemberID", m.MemberID);
@@ -102,6 +107,7 @@ namespace CoffeeAppWebRole.Controllers
             mapMember.Add("ProfilePic", "");
             mapMember.Add("DataAccessControlMap", GetDataAccessControlMap(m.DataAccessControl));
             mapMember.Add("MemberStatus", m.MemberStatus);
+            mapMember.Add("IsAccepted", isAccepted);
 
             return mapMember;
         }
@@ -201,7 +207,7 @@ namespace CoffeeAppWebRole.Controllers
             return View();
         }
 
-        public ActionResult CourseInfo(string userid2, string courseCode)
+        public ActionResult CourseInfo(string userid2, string courseCode, string feedback)
         {
             if (!HasLocalAccount())
             {
@@ -228,6 +234,8 @@ namespace CoffeeAppWebRole.Controllers
             ViewBag.NumOfStudent = c.NumOfStudent;
             ViewBag.CourseDateTime = c.CourseDateTime;
             ViewBag.Instructor = c.Instructor;
+
+            ViewBag.Feedback = feedback;
 
             return View();
         }
@@ -275,6 +283,8 @@ namespace CoffeeAppWebRole.Controllers
             ViewBag.MediaResourcesPhoto = mediaResourcesPhoto;
             ViewBag.MediaResourcesOther = mediaResourcesOther;
 
+            ViewBag.CourseID = courseid;
+
             return View();
         }
 
@@ -295,13 +305,40 @@ namespace CoffeeAppWebRole.Controllers
             IQueryable<Enrollment> enrollments;
             Member m;
             if (courseid != null)
-            {  
+            {
+                Hashtable t4 = new Hashtable();
+                IQueryable<Accepted> accepteds = ADA.GetAccepteds(userid);
+                foreach (var q in accepteds)
+                {
+                    if (userid.Equals(q.MemberID1))
+                    {
+                        if (!t4.ContainsKey(q.MemberID2))
+                        {
+                            t4.Add(q.MemberID2, 0);
+                        }
+                    }
+                    else
+                    {
+                        if (!t4.ContainsKey(q.MemberID1))
+                        {
+                            t4.Add(q.MemberID1, 0);
+                        }
+                    }
+                }
+
                 enrollments = ADE.GetEnrollmentsByCourseId(courseid);
                 foreach (var q in enrollments)
                 {
                     if (!userid.Equals(q.MemberID)){
                         m = ADM.GetMemberById(q.MemberID);
-                        members.Add(GetMemberInfoMap(m));               
+
+                        Boolean isFriend = false;
+                        if (t4.ContainsKey(m.MemberID))
+                        {
+                            isFriend = true;
+                        }
+
+                        members.Add(GetMemberInfoMap(m, isFriend));               
                     }
                 }
             }
@@ -368,6 +405,16 @@ namespace CoffeeAppWebRole.Controllers
 
             ViewBag.Message = "Your course friend list page.";
 
+
+            //Update friendship
+            if (userid != null && acceptmemberid != null)
+            {
+                //ADF.AcceptFriendship(userid, acceptmemberid);
+                ADA.AddAccepted(userid, acceptmemberid);
+                ADP.DeletePending(userid, acceptmemberid);
+            }
+
+
             //Find classmates
             List<Dictionary<string, object>> members = new List<Dictionary<string, object>>();
             IQueryable<Pending> friendships;
@@ -379,14 +426,14 @@ namespace CoffeeAppWebRole.Controllers
                 foreach (var q in friendships)
                 {
                     m = ADM.GetMemberById(q.BMemberID);
-                    members.Add(GetMemberInfoMap(m));
+                    members.Add(GetMemberInfoMap(m, false));
                 }
 
                 friendships = ADP.GetTargetedMembersB_RequestedPending(userid);
                 foreach (var q in friendships)
                 {
                     m = ADM.GetMemberById(q.AMemberID);
-                    members.Add(GetMemberInfoMap(m));
+                    members.Add(GetMemberInfoMap(m, false));
                 }
 
                 accepteds = ADA.GetAccepteds(userid);
@@ -395,24 +442,20 @@ namespace CoffeeAppWebRole.Controllers
                     if (userid.Equals(q.MemberID1))
                     {
                         m = ADM.GetMemberById(q.MemberID2);
-                        members.Add(GetMemberInfoMap(m));
+                        members.Add(GetMemberInfoMap(m, true));
                     }
                     else
                     {
                         m = ADM.GetMemberById(q.MemberID1);
-                        members.Add(GetMemberInfoMap(m));
+                        members.Add(GetMemberInfoMap(m, true));
                     }
                 }
             }
 
             
-            //Update friendship
-            if (userid != null && acceptmemberid != null)
-            {
-                //ADF.AcceptFriendship(userid, acceptmemberid);
-                ADA.AddAccepted(userid, acceptmemberid);
-                ADP.DeletePending(userid, acceptmemberid);
-            }
+
+
+
 
             
             //Search for friends that are already friended
@@ -651,23 +694,31 @@ namespace CoffeeAppWebRole.Controllers
 
             string feedback = "";
 
-            Course course = ADC.GetCourseById(courseid);
-            if (course.CoursePIN.Equals(coursepin))
-            {
-                Enrollment enrollment = ADE.GetEnrollmentByMemberIdAndCourseId(userId, courseid);
-                if (enrollment == null)
+            if (coursepin != null) {
+                Course course = ADC.GetCourseById(courseid);
+                if (course.CoursePIN.Equals(coursepin))
                 {
-                    ADE.AddEnrollment(courseid, Enrollment.Status.Past.ToString(), userId);
-                    feedback = "Course added.";
+                    Enrollment enrollment = ADE.GetEnrollmentByMemberIdAndCourseId(userId, courseid);
+                    if (enrollment == null)
+                    {
+                        ADE.AddEnrollment(courseid, Enrollment.Status.Past.ToString(), userId);
+
+                        return RedirectToAction("CourseInfo", "Home", new { courseCode = courseid, feedback = "Course added." });
+                    }
+                    else
+                    {
+                        feedback = "Your enrollment record is not found.";
+                    }
                 }
                 else
                 {
-                    feedback = "Your enrollment record is not found.";
+                    feedback = "Incorrect authorization code, please try again.";
                 }
             }
 
             ViewBag.Feedback = feedback;
             ViewBag.CourseId = courseid;
+
             return View();
         }
     }

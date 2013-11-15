@@ -5,16 +5,16 @@
     <AzureDeleteDeploymentOnFailure>False</AzureDeleteDeploymentOnFailure>
     <AzureDeploymentLabel>CoffeeApp</AzureDeploymentLabel>
     <AzureDeploymentReplacementMethod>AutomaticUpgrade</AzureDeploymentReplacementMethod>
-    <AzureSlot>Staging</AzureSlot>
+    <AzureSlot>Production</AzureSlot>
     <AzureEnableRemoteDesktop>True</AzureEnableRemoteDesktop>
     <AzureEnableWebDeploy>False</AzureEnableWebDeploy>
     <AzureFallbackToDeleteAndRecreateIfUpgradeFails>False</AzureFallbackToDeleteAndRecreateIfUpgradeFails>
-    <AzureHostedServiceLabel>nbition-dev2</AzureHostedServiceLabel>
-    <AzureHostedServiceName>nbition-dev2</AzureHostedServiceName>
+    <AzureHostedServiceLabel>tosavour</AzureHostedServiceLabel>
+    <AzureHostedServiceName>tosavour</AzureHostedServiceName>
     <AzureEnableIntelliTrace>False</AzureEnableIntelliTrace>
     <AzureEnableProfiling>False</AzureEnableProfiling>
     <AzureServiceConfiguration>Cloud</AzureServiceConfiguration>
-    <AzureSolutionConfiguration>Debug</AzureSolutionConfiguration>
+    <AzureSolutionConfiguration>Release</AzureSolutionConfiguration>
     <AzureStorageAccountLabel>nbitiondev</AzureStorageAccountLabel>
     <AzureStorageAccountName>nbitiondev</AzureStorageAccountName>
     <AzureAppendTimestampToDeploymentLabel>True</AzureAppendTimestampToDeploymentLabel>

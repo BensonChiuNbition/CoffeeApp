@@ -12,9 +12,9 @@
                 <div class="row">
                     <div class="large-12 columns">
                         
-                        <h1>@ViewBag.Title</h1>
                         <div class="panel">
-                            <p>If you are a member of this class, please enter an authorization code for your full access to the class resources:</p>
+                            <p>If you are a member of this class, please enter an authorization code (Obtain from your instructor) 
+                                for your full access to the class resources:</p>
 
                             <form action="CourseSubmit"  method="post" enctype="multipart/form-data">
                                 <input type="hidden" class="inputtext" name="courseid" value="@ViewBag.CourseId" />
@@ -27,7 +27,11 @@
                         </div>
                     </div>
                 </div>
-                
+                <div class="row">
+                    <div class="large-12 columns">
+                        <p>@Html.ActionLink("Back to Course Info", "CourseInfo", "Home", new { coursecode = @ViewBag.CourseId }, new { @class = "button" })</p>                                
+                    </div>
+                </div>                
             </div>
 
         </div>

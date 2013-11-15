@@ -32,11 +32,13 @@
                                 <div class="large-8 columns">
                                     <h3>@member["NameEN"]</h3>
 
-                                    @foreach (var x in member["DataAccessControlMap"])
-                                    {
-                                        if (x.Value == 1 && !"ProfilePic".Equals(x.Key) && !"".Equals(member[x.Key])) 
+                                    @if (@member["IsAccepted"] == true){
+                                        foreach (var x in member["DataAccessControlMap"])
                                         {
-                                            <p><b>@ViewBag.MemberInfoLabel[x.Key]</b> @member[x.Key]</p>
+                                            if (x.Value == 1 && !"ProfilePic".Equals(x.Key) && !"".Equals(member[x.Key])) 
+                                            {
+                                                <p><b>@ViewBag.MemberInfoLabel[x.Key]</b> @member[x.Key]</p>
+                                            }
                                         }
                                     }
 
