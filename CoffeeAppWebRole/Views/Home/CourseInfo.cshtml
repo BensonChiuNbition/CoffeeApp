@@ -30,6 +30,8 @@
                                     @if ("Past".Equals(ViewBag.EnrollmentInfo)){
                                     <p>@Html.ActionLink("Course Media", "CourseMediaResource", "Home", new { courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
                                     <p>@Html.ActionLink("Your Classmates", "CourseClassmateList", "Home", new { userid=myMemberId, courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
+                                    }else if ("".Equals(ViewBag.EnrollmentInfo)){
+                                    <p>@Html.ActionLink("Course Submit", "CourseSubmit", "Home", new { courseid = @ViewBag.CourseID }, new { @class = "button" })</p>
                                     }
                                 </div>
                             </div>

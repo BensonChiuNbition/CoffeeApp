@@ -30,5 +30,6 @@ namespace CoffeeAppWebRole.Models
         public string NumOfStudent { get; set; }
         public string CourseDateTime { get; set; }
         public string Instructor { get; set; }
+        public string CoursePIN { get; set; }
     }
 }

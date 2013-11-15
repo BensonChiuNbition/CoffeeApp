@@ -1,0 +1,38 @@
+﻿@{
+    ViewBag.Title = "Course Submission";
+}
+
+@section featured {
+
+    <section class="featured">
+        <div class="content-wrapper">
+
+
+            <div class="cf coursepin">
+                <div class="row">
+                    <div class="large-12 columns">
+                        
+                        <h1>@ViewBag.Title</h1>
+                        <div class="panel">
+                            <p>If you are a member of this class, please enter an authorization code for your full access to the class resources:</p>
+
+                            <form action="CourseSubmit"  method="post" enctype="multipart/form-data">
+                                <input type="hidden" class="inputtext" name="courseid" value="@ViewBag.CourseId" />
+                                <input type="text" class="inputtext" name="coursepin" value="" />
+                                <p>@ViewBag.Feedback</p>
+                                <p><input type="submit" value="Submit" class="button" id="submit3"></p>
+                            </form>
+
+                            
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    </section>
+}
+
+@section featured2 {
+}

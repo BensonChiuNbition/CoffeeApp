@@ -635,5 +635,40 @@ namespace CoffeeAppWebRole.Controllers
             }
             return RedirectToAction("CourseList", "Home", new { feedback = fbk });
         }
+
+        public ActionResult CourseSubmit()
+        {
+            if (!HasLocalAccount())
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            string userId = GetMemberId();
+
+
+            string courseid = Request["courseid"];
+            string coursepin = Request["coursepin"];
+
+            string feedback = "";
+
+            Course course = ADC.GetCourseById(courseid);
+            if (course.CoursePIN.Equals(coursepin))
+            {
+                Enrollment enrollment = ADE.GetEnrollmentByMemberIdAndCourseId(userId, courseid);
+                if (enrollment == null)
+                {
+                    ADE.AddEnrollment(courseid, Enrollment.Status.Past.ToString(), userId);
+                    feedback = "Course added.";
+                }
+                else
+                {
+                    feedback = "Your enrollment record is not found.";
+                }
+            }
+
+            ViewBag.Feedback = feedback;
+            ViewBag.CourseId = courseid;
+            return View();
+        }
     }
 }

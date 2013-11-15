@@ -24,6 +24,16 @@ namespace CoffeeAppWebRole.ActionData
             return Instance;
         }
 
+        public void AddEnrollment(string courseId, string enrollStatus, string memberId)
+        {
+            var enrollment = new Enrollment(){
+                CourseID = courseId,
+                EnrollStatus = enrollStatus,
+                MemberID = memberId
+            };
+            Context.AddEnrollment(enrollment);
+        }
+
         public Enrollment GetEnrollmentByMemberIdAndCourseId(string userid, string courseId)
         {
             return Context.GetEnrollmentByMemberIdAndCourseId(userid, courseId);

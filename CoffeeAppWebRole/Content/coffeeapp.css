@@ -309,3 +309,10 @@ form {
 #ui-datepicker-div {
     background-color: beige;
 }
+
+    .coursepin input.inputtext {
+        border-radius: 15px;
+        height: 30px;
+        line-height: 30px;
+        margin: 0 0 1% 0;
+    }

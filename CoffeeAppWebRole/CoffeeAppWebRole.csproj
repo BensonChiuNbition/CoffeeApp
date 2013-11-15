@@ -373,6 +373,7 @@
     <Content Include="Views\Home\CourseMediaResource.cshtml" />
     <Content Include="Views\Home\FriendMadeList.cshtml" />
     <Content Include="Views\Home\Profile.cshtml" />
+    <Content Include="Views\Home\CourseSubmit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
